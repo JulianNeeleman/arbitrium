@@ -1,0 +1,6 @@
+# Bazel.
+bazel-*
+
+# LLVM.
+compile_commands.json
+tools/actions/
