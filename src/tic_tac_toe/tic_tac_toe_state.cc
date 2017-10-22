@@ -1,4 +1,4 @@
-#include "include/tic_tac_toe_state.h"
+#include "include/tic_tac_toe/tic_tac_toe_state.h"
 
 std::unique_ptr<State>
 TicTacToeState::transition(const std::unique_ptr<Action> &action) const {

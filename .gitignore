@@ -4,3 +4,6 @@ bazel-*
 # LLVM.
 compile_commands.json
 tools/actions/
+
+# Vim.
+**/*.swp

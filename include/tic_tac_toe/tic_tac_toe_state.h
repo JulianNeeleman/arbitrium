@@ -2,7 +2,7 @@
 #define TIC_TAC_TOE_STATE_H
 
 #include "include/lib/state.h"
-#include "include/tic_tac_toe_action.h"
+#include "include/tic_tac_toe/tic_tac_toe_action.h"
 
 #include <memory>
 #include <vector>
