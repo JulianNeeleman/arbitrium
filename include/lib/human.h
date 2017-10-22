@@ -1,31 +1,26 @@
-#ifndef LIB_MINIMAX_H
-#define LIB_MINIMAX_H
+#ifndef LIB_HUMAN_H
+#define LIB_HUMAN_H
 
 #include "include/lib/action.h"
 #include "include/lib/player.h"
 #include "include/lib/state.h"
 
-#include <limits>
+#include <iostream>
 #include <memory>
 
-class Minimax : public Player {
+class Human : public Player {
   private:
     // Private member variables.
-    int max_depth_;
 
     // Private member functions.
-    double minimax(const std::unique_ptr<State> &, int, bool) const;
 
   public:
     // Constructors.
-    Minimax(int);
+    Human();
 
     // Public member functions.
     std::unique_ptr<Action>
     choose_action(const std::unique_ptr<State> &) const override;
-
-    // Setters.
-    void set_max_depth(int);
 };
 
-#endif // LIB_MINIMAX_H
+#endif // LIB_HUMAN_H
