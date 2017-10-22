@@ -12,7 +12,7 @@ class Action {
 
   public:
     // Constructors.
-    Action(unsigned);
+    Action(int);
 
     // Public member functions.
     virtual std::string serialize() const = 0;

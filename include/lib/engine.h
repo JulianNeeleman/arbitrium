@@ -11,7 +11,7 @@ class Engine {
     // Private member variables.
     std::unique_ptr<State> state_;
     std::vector<std::unique_ptr<Player>> players_;
-    unsigned turn_;
+    int turn_;
 
     // Private member functions.
     void next_turn();

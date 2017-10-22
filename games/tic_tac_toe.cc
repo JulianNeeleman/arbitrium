@@ -7,7 +7,7 @@ int main() {
     std::unique_ptr<State> state(new TicTacToeState());
     std::vector<std::unique_ptr<Player>> players;
     players.push_back(std::unique_ptr<Player>(new Human()));
-    players.push_back(std::unique_ptr<Player>(new Minimax(5)));
+    players.push_back(std::unique_ptr<Player>(new Human()));
 
     Engine(std::move(state), std::move(players));
 
