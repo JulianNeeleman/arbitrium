@@ -1,12 +1,15 @@
 #ifndef LIB_STATE_H
 #define LIB_STATE_H
 
+#include "include/lib/action.h"
+
 #include <memory>
 #include <vector>
 
 class State {
-  private:
+  protected:
     // Private member variables.
+    int player_;
 
     // Private member functions.
 
