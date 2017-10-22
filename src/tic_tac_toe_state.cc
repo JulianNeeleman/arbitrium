@@ -61,3 +61,19 @@ std::vector<std::unique_ptr<Action>> TicTacToeState::actions() const {
     }
     return legal;
 }
+
+std::string TicTacToeState::serialize() const {
+    std::string out = "";
+    out += "BOARD:\n";
+
+    // Serialize the board.
+    for (unsigned i = 0; i < 3; i++) {
+        for (unsigned j = 0; j < 3; j++) {
+            out += board_[i][j] + '\t';
+        }
+        out += '\n';
+    }
+
+    out += "TURN: " + player_ + '\n';
+    return out;
+}

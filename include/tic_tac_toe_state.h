@@ -25,6 +25,8 @@ class TicTacToeState : public State {
     bool is_terminal() const override;
     double evaluate() const override;
     std::vector<std::unique_ptr<Action>> actions() const override;
+
+    std::string serialize() const override;
     // Setters.
 };
 

@@ -23,6 +23,9 @@ class State {
     virtual bool is_terminal() const = 0;
     virtual double evaluate() const = 0;
     virtual std::vector<std::unique_ptr<Action>> actions() const = 0;
+
+    virtual std::string serialize() const = 0;
+
     // Setters.
 };
 

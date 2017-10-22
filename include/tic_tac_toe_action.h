@@ -15,6 +15,7 @@ class TicTacToeAction : public Action {
     TicTacToeAction(int, unsigned, unsigned);
 
     // Public member functions.
+    std::string serialize() const override;
 
     // Setters.
 
