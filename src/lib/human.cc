@@ -10,10 +10,10 @@ Human::Human() {}
  */
 std::unique_ptr<Action>
 Human::choose_action(const std::unique_ptr<State> &state) const {
+    std::cout << state->serialize();
     std::vector<std::unique_ptr<Action>> actions = state->actions();
     for (unsigned option = 0; option < actions.size(); option++) {
-        std::cout << option << ". " << actions[option]->serialize()
-                  << std::endl;
+        std::cout << option << ". " << actions[option]->serialize();
     }
 
     unsigned choice;
