@@ -11,20 +11,13 @@ Engine<State, Action>::Engine(
         log();
         next_turn();
     }
-
-    // Game over.
-    int result = state_.result();
-    if (result == -1) {
-        // Undecisive.
-        std::cout << "UNDECISIVE\n";
-    } else {
-        std::cout << "GAME OVER, PLAYER " << result << " WINS\n";
-    }
 }
 
 template <class State, class Action> void Engine<State, Action>::next_turn() {
     // Request action from player.
     Action action = players_[state_.get_turn()]->choose_action(state_);
+    std::cout << "PLAYER " << state_.get_turn() << " CHOSE ACTION "
+              << action.serialize();
 
     // Apply the action to the current engine state.
     state_ = state_.transition(action);

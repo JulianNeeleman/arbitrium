@@ -1,7 +1,7 @@
 #ifndef LIB_ENGINE_H
 #define LIB_ENGINE_H
 
-#include "include/lib/player.h"
+#include "include/lib/player/player.h"
 
 #include <memory>
 #include <string>

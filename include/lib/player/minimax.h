@@ -1,12 +1,11 @@
 #ifndef LIB_MINIMAX_H
 #define LIB_MINIMAX_H
 
-#include "include/lib/player.h"
+#include "include/lib/player/player.h"
 
 #include <limits>
 
-template <class State>
-template <class Action>
+template <class State, class Action>
 class Minimax : public Player<State, Action> {
   private:
     // Private member variables.
@@ -26,6 +25,6 @@ class Minimax : public Player<State, Action> {
     void set_max_depth(int);
 };
 
-#include "src/lib/minimax.cc"
+#include "src/lib/player/minimax.inc"
 
 #endif // LIB_MINIMAX_H

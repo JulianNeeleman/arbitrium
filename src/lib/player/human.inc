@@ -1,4 +1,4 @@
-#include "include/lib/human.h"
+#include "include/lib/player/human.h"
 
 /**
  * Assignment constructor.
@@ -10,10 +10,10 @@ template <class State, class Action> Human<State, Action>::Human() {}
  */
 template <class State, class Action>
 Action Human<State, Action>::choose_action(const State &state) const {
-    // Ask human for input.
+    std::vector<Action> actions = state.actions();
+
     unsigned choice;
     std::cin >> choice;
 
-    std::vector<Action> actions = state.actions();
     return std::move(actions[choice]);
 }

@@ -1,10 +1,9 @@
 #ifndef LIB_HUMAN_H
 #define LIB_HUMAN_H
 
-#include "include/lib/player.h"
+#include "include/lib/player/player.h"
 
 #include <iostream>
-#include <memory>
 
 template <class State, class Action>
 class Human : public Player<State, Action> {
