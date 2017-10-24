@@ -26,7 +26,7 @@ double Minimax<State, Action>::minimax(const State &state, int depth,
     } else {
         double best_score = std::numeric_limits<double>::max();
         for (const Action &action : state.actions()) {
-            double score = minimax(state.transition(action), depth - 1, true);
+            double score = minimax(state.transition(action), depth - 1, false);
             best_score = std::min(best_score, score);
         }
         return best_score;
@@ -42,11 +42,13 @@ Action Minimax<State, Action>::choose_action(const State &state) const {
     std::vector<Action> actions = state.actions();
 
     Action best_action = *actions.begin();
-    double best_score = std::numeric_limits<double>::lowest();
+    double best_score = std::numeric_limits<double>::max();
 
     for (const Action &action : actions) {
         double score = minimax(state.transition(action), max_depth_ - 1, false);
+        std::cout << "score " << score << std::endl;
         if (score < best_score) {
+            std::cout << "?" << std::endl;
             best_action = action;
             best_score = score;
         }

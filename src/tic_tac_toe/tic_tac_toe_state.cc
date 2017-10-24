@@ -5,12 +5,17 @@
  * Default constructor.
  */
 TicTacToeState::TicTacToeState()
-    : turn_(0), board_(3, std::vector<int>(3, -1)) {}
+    : players_(2), turn_(0), board_(3, std::vector<int>(3, -1)) {}
 
 TicTacToeState TicTacToeState::transition(const TicTacToeAction &action) const {
     TicTacToeState child = *this;
 
+    // Apply changes to the model.
     child.board_[action.get_i()][action.get_j()] = turn_;
+
+    // Move turn to next player.
+    child.turn_ = (turn_ + 1) % players_;
+
     return child;
 }
 
@@ -23,14 +28,14 @@ bool TicTacToeState::is_terminal() const {
 
 int TicTacToeState::result() const {
     assert(is_terminal());
-    double eval = evaluate();
-    if (eval == 0.0) {
+    double score = evaluate();
+    if (score == 0.0) {
         // Draw.
         return -1;
     }
 
     // Decisive result.
-    return eval == 1.0 ? turn_ : !turn_;
+    return score == 1.0 ? turn_ : !turn_;
 }
 
 /**
@@ -96,5 +101,3 @@ std::string TicTacToeState::serialize() const {
 }
 
 unsigned TicTacToeState::get_turn() const { return turn_; }
-
-void TicTacToeState::set_turn(unsigned turn) { turn_ = turn; }

@@ -21,9 +21,6 @@ template <class State, class Action> void Engine<State, Action>::next_turn() {
 
     // Apply the action to the current engine state.
     state_ = state_.transition(action);
-
-    // Increment turn counter.
-    state_.set_turn((state_.get_turn() + 1) % players_.size());
 }
 
 template <class State, class Action> void Engine<State, Action>::log() const {

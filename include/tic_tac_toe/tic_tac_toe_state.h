@@ -9,7 +9,7 @@
 class TicTacToeState {
   private:
     // Private member variables.
-    unsigned turn_;
+    unsigned players_, turn_;
     std::vector<std::vector<int>> board_;
 
     // Private member functions.
@@ -30,9 +30,6 @@ class TicTacToeState {
 
     // Getters.
     unsigned get_turn() const;
-
-    // Setters.
-    void set_turn(unsigned);
 };
 
 #endif // TIC_TAC_TOE_STATE_H
