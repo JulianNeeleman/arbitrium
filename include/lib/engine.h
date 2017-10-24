@@ -2,25 +2,28 @@
 #define LIB_ENGINE_H
 
 #include "include/lib/player.h"
-#include "include/lib/state.h"
 
+#include <memory>
 #include <string>
+#include <vector>
 
-class Engine {
-  protected:
+template <class State, class Action> class Engine {
+  private:
     // Private member variables.
-    std::unique_ptr<State> state_;
-    std::vector<std::unique_ptr<Player>> players_;
+    State state_;
+    const std::vector<std::unique_ptr<Player<State, Action>>> &players_;
     int turn_;
 
     // Private member functions.
     void next_turn();
+    void log() const;
 
   public:
     // Constructors.
-    Engine(std::unique_ptr<State>, std::vector<std::unique_ptr<Player>>);
-
-    // Public member functions.
+    Engine(const State &,
+           const std::vector<std::unique_ptr<Player<State, Action>>> &);
 };
+
+#include "src/lib/engine.inc"
 
 #endif // LIB_ENGINE_H

@@ -1,23 +1,19 @@
 #ifndef TIC_TAC_TOE_ACTION_H
 #define TIC_TAC_TOE_ACTION_H
 
-#include "include/lib/action.h"
+#include <string>
 
-class TicTacToeAction : public Action {
+class TicTacToeAction {
   private:
     // Private member variables.
     unsigned i_, j_;
 
-    // Private member functions.
-
   public:
     // Constructors.
-    TicTacToeAction(int, unsigned, unsigned);
+    TicTacToeAction(unsigned, unsigned);
 
     // Public member functions.
-    std::string serialize() const override;
-
-    // Setters.
+    std::string serialize() const;
 
     // Getters.
     unsigned get_i() const;

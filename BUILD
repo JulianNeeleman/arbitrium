@@ -1,7 +1,7 @@
 # Core algorithms library.
 cc_library(
     name = "arbitrium_lib",
-    srcs = glob(["src/lib/**/*.cc"]),
+    srcs = glob(["src/lib/**/*.cc", "src/lib/**/*.inc"]),
     hdrs = glob(["include/lib/**/*.h"]),
 )
 

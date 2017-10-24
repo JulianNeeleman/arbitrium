@@ -1,33 +1,38 @@
 #ifndef TIC_TAC_TOE_STATE_H
 #define TIC_TAC_TOE_STATE_H
 
-#include "include/lib/state.h"
 #include "include/tic_tac_toe/tic_tac_toe_action.h"
 
-#include <memory>
+#include <cassert>
 #include <vector>
 
-class TicTacToeState : public State {
+class TicTacToeState {
   private:
     // Private member variables.
-    int board_[3][3];
+    unsigned turn_;
+    std::vector<std::vector<int>> board_;
 
     // Private member functions.
 
   public:
     // Constructors.
-    TicTacToeState() = default;
+    TicTacToeState();
 
     // Public member functions.
-    std::unique_ptr<State>
-    transition(const std::unique_ptr<Action> &) const override;
+    TicTacToeState transition(const TicTacToeAction &) const;
 
-    bool is_terminal() const override;
-    double evaluate() const override;
-    std::vector<std::unique_ptr<Action>> actions() const override;
+    bool is_terminal() const;
+    int result() const;
+    double evaluate() const;
+    std::vector<TicTacToeAction> actions() const;
 
-    std::string serialize() const override;
+    std::string serialize() const;
+
+    // Getters.
+    unsigned get_turn() const;
+
     // Setters.
+    void set_turn(unsigned);
 };
 
 #endif // TIC_TAC_TOE_STATE_H
