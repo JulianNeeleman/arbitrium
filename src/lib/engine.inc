@@ -5,7 +5,7 @@ template <class State, class Action>
 Engine<State, Action>::Engine(
     const State &initial_state,
     const std::vector<std::unique_ptr<Player<State, Action>>> &players)
-    : state_(std::move(initial_state)), players_(std::move(players)) {
+    : state_(initial_state), players_(std::move(players)) {
     // Game loop.
     while (!state_.is_terminal()) {
         log();

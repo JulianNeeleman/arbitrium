@@ -47,12 +47,12 @@ double TicTacToeState::evaluate() const {
     for (unsigned i = 0; i < 3; i++) {
         if (board_[i][0] != -1 && board_[i][0] == board_[i][1] &&
             board_[i][1] == board_[i][2]) {
-            return board_[i][0] == static_cast<int>(turn_) ? 1.0 : -1.0;
+            return board_[i][0] ? 1.0 : -1.0;
         }
 
         if (board_[0][i] != -1 && board_[0][i] == board_[1][i] &&
             board_[1][i] == board_[2][i]) {
-            return board_[0][i] == static_cast<int>(turn_) ? 1.0 : -1.0;
+            return board_[0][i] ? 1.0 : -1.0;
         }
     }
 
@@ -61,7 +61,7 @@ double TicTacToeState::evaluate() const {
         ((board_[0][0] != -1 && board_[0][0] == board_[1][1] &&
           board_[1][1] == board_[2][2]) ||
          (board_[0][2] == board_[1][1] && board_[1][1] == board_[2][0]))) {
-        return board_[1][1] == static_cast<int>(turn_) ? 1.0 : -1.0;
+        return board_[1][1] ? 1.0 : -1.0;
     }
 
     // No winner.
