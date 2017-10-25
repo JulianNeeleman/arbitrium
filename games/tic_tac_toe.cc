@@ -8,9 +8,9 @@ int main() {
     std::vector<std::unique_ptr<Player<TicTacToeState, TicTacToeAction>>>
         players;
     players.push_back(std::unique_ptr<Player<TicTacToeState, TicTacToeAction>>(
-        new Human<TicTacToeState, TicTacToeAction>()));
-    players.push_back(std::unique_ptr<Player<TicTacToeState, TicTacToeAction>>(
         new Minimax<TicTacToeState, TicTacToeAction>(15)));
+    players.push_back(std::unique_ptr<Player<TicTacToeState, TicTacToeAction>>(
+        new Human<TicTacToeState, TicTacToeAction>()));
     Engine<TicTacToeState, TicTacToeAction>(state, players);
     return 0;
 }

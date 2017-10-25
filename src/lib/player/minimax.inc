@@ -44,9 +44,9 @@ Action Minimax<State, Action>::choose_action(const State &state) const {
     Action best_action = *actions.begin();
     double best_score = std::numeric_limits<double>::max();
 
+    int color = turn ? -1.0 : 1.0;
     for (const Action &action : actions) {
-        double score =
-            -minimax(state.transition(action), max_depth_ - 1, false);
+        double score = minimax(state.transition(action), max_depth_ - 1, !turn);
         std::cout << "score " << score << std::endl;
         if (score < best_score) {
             best_action = action;
