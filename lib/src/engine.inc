@@ -1,5 +1,4 @@
 #include "lib/include/engine.h"
-#include <iostream>
 
 template <class State, class Action>
 Engine<State, Action>::Engine(

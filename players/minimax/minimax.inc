@@ -11,33 +11,42 @@ Minimax<State, Action>::Minimax(int max_depth) : max_depth_(max_depth) {}
  */
 template <class State, class Action>
 double Minimax<State, Action>::minimax(const State &state, int depth,
-                                       bool maximize) const {
+                                       bool maximize) {
+    // Check cache.
+    std::pair<bool, double> cache_result =
+        Cache<State>::retrieve_from_cache(state);
+    if (cache_result.first) {
+        return cache_result.second;
+    }
+
     if (depth == 0 || state.is_terminal()) {
         return state.evaluate();
     }
 
+    double best_score;
     if (maximize) {
-        double best_score = std::numeric_limits<double>::lowest();
+        best_score = std::numeric_limits<double>::lowest();
         for (const Action &action : state.actions()) {
             double score = minimax(state.transition(action), depth - 1, false);
             best_score = std::max(best_score, score);
         }
-        return best_score;
     } else {
-        double best_score = std::numeric_limits<double>::max();
+        best_score = std::numeric_limits<double>::max();
         for (const Action &action : state.actions()) {
             double score = minimax(state.transition(action), depth - 1, true);
             best_score = std::min(best_score, score);
         }
-        return best_score;
     }
+
+    Cache<State>::add_to_cache(state, best_score);
+    return best_score;
 }
 
 /**
  * Choose the best action from the current state.
  */
 template <class State, class Action>
-Action Minimax<State, Action>::choose_action(const State &state) const {
+Action Minimax<State, Action>::choose_action(const State &state) {
     // Generate a list of possible actions.
     std::vector<Action> actions = state.actions();
 

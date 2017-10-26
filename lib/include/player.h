@@ -4,7 +4,7 @@
 template <class State, class Action> class Player {
   public:
     // Public member functions.
-    virtual Action choose_action(const State &) const = 0;
+    virtual Action choose_action(const State &) = 0;
 };
 
 #endif // LIB_PLAYER_H

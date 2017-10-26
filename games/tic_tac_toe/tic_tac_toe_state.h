@@ -16,6 +16,9 @@ class TicTacToeState {
     // Constructors.
     TicTacToeState();
 
+    // Operator overloads.
+    bool operator<(const TicTacToeState &) const;
+
     // Public member functions.
     TicTacToeState transition(const TicTacToeAction &) const;
 

@@ -7,6 +7,9 @@
 TicTacToeState::TicTacToeState()
     : players_(2), turn_(0), board_(3, std::vector<int>(3, -1)) {}
 
+/**
+ * Update the board with the action on a copy of the state.
+ */
 TicTacToeState TicTacToeState::transition(const TicTacToeAction &action) const {
     TicTacToeState child = *this;
 
@@ -20,12 +23,22 @@ TicTacToeState TicTacToeState::transition(const TicTacToeAction &action) const {
 }
 
 /**
+ * Provide a way to sort states in cache.
+ */
+bool TicTacToeState::operator<(const TicTacToeState &rhs) const {
+    return turn_ == rhs.turn_ ? board_ < rhs.board_ : turn_ < rhs.turn_;
+}
+
+/**
  * Check if a player has got Tic-Tac-Toe, or the board is full.
  */
 bool TicTacToeState::is_terminal() const {
     return evaluate() != 0.0 || actions().empty();
 }
 
+/**
+ * Decide a winner, or declare a draw, when the game ends.
+ */
 int TicTacToeState::result() const {
     assert(is_terminal());
     double score = evaluate();
@@ -86,6 +99,9 @@ std::vector<TicTacToeAction> TicTacToeState::actions() const {
     return legal;
 }
 
+/**
+ * Provide a serialization of the state.
+ */
 std::string TicTacToeState::serialize() const {
     std::string out = "";
 
@@ -100,4 +116,7 @@ std::string TicTacToeState::serialize() const {
     return out;
 }
 
+/**
+ * Retrieve who's turn it is in this state.
+ */
 unsigned TicTacToeState::get_turn() const { return turn_; }
