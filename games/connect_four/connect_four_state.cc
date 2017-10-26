@@ -5,7 +5,7 @@
  * Default constructor.
  */
 ConnectFourState::ConnectFourState()
-    : players_(2), turn_(0), board_(6, std::vector<int>(7, -1)) {}
+    : players_(2), turn_(0), board_(7, std::vector<int>(6, -1)) {}
 
 /**
  * Update the board with the action on a copy of the state.
@@ -66,6 +66,7 @@ int ConnectFourState::result() const {
  * he loses, return -1. Otherwise, return 0.
  */
 double ConnectFourState::evaluate() const {
+    return 0.0;
     // Check rows and columns.
     for (unsigned i = 0; i < 3; i++) {
         if (board_[i][0] != -1 && board_[i][0] == board_[i][1] &&
@@ -101,7 +102,7 @@ std::vector<ConnectFourAction> ConnectFourState::actions() const {
     // Loop over the top row to check which
     // columns aren't full;
     for (unsigned column = 0; column < 7; column++) {
-        if (board_[5][column] == -1) {
+        if (board_[column][5] == -1) {
             legal.push_back(ConnectFourAction(column));
         }
     }
@@ -115,9 +116,9 @@ std::string ConnectFourState::serialize() const {
     std::string out = "";
 
     // Serialize the board.
-    for (unsigned row = 0; row < 6; row++) {
+    for (int row = 5; row >= 0; row--) {
         for (unsigned column = 0; column < 7; column++) {
-            out += std::to_string(board_[row][column]) + '\t';
+            out += std::to_string(board_[column][row]) + '\t';
         }
         out += '\n';
     }

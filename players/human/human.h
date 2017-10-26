@@ -12,7 +12,7 @@ class Human : public Player<State, Action> {
     Human();
 
     // Public member functions.
-    Action choose_action(const State &) const override;
+    Action choose_action(const State &) override;
 };
 
 #include "players/human/human.inc"
