@@ -1,4 +1,4 @@
-#include "include/lib/player/human.h"
+#include "players/human/human.h"
 
 /**
  * Assignment constructor.

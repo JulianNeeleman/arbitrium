@@ -1,7 +1,7 @@
 #ifndef LIB_HUMAN_H
 #define LIB_HUMAN_H
 
-#include "include/lib/player/player.h"
+#include "lib/include/player.h"
 
 #include <iostream>
 
@@ -15,6 +15,6 @@ class Human : public Player<State, Action> {
     Action choose_action(const State &) const override;
 };
 
-#include "src/lib/player/human.inc"
+#include "players/human/human.inc"
 
 #endif // LIB_HUMAN_H

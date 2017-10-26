@@ -1,4 +1,4 @@
-#include "include/lib/engine.h"
+#include "lib/include/engine.h"
 #include <iostream>
 
 template <class State, class Action>
@@ -24,6 +24,7 @@ template <class State, class Action> void Engine<State, Action>::next_turn() {
 }
 
 template <class State, class Action> void Engine<State, Action>::log() const {
+    std::cout << "++++++++++++++++++++++++++++++++++++++" << std::endl;
     std::cout << "STATE:\n" << state_.serialize();
     std::vector<Action> actions = state_.actions();
     std::cout << "ACTIONS:\n";

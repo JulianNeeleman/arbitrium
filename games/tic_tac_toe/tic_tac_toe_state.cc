@@ -1,4 +1,4 @@
-#include "include/tic_tac_toe/tic_tac_toe_state.h"
+#include "games/tic_tac_toe/tic_tac_toe_state.h"
 #include <iostream>
 
 /**

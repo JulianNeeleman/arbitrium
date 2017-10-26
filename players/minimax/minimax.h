@@ -1,7 +1,7 @@
 #ifndef LIB_MINIMAX_H
 #define LIB_MINIMAX_H
 
-#include "include/lib/player/player.h"
+#include "lib/include/player.h"
 
 #include <limits>
 
@@ -25,6 +25,6 @@ class Minimax : public Player<State, Action> {
     void set_max_depth(int);
 };
 
-#include "src/lib/player/minimax.inc"
+#include "players/minimax/minimax.inc"
 
 #endif // LIB_MINIMAX_H

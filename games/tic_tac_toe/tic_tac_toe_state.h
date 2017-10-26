@@ -1,7 +1,7 @@
 #ifndef TIC_TAC_TOE_STATE_H
 #define TIC_TAC_TOE_STATE_H
 
-#include "include/tic_tac_toe/tic_tac_toe_action.h"
+#include "games/tic_tac_toe/tic_tac_toe_action.h"
 
 #include <cassert>
 #include <vector>
@@ -11,8 +11,6 @@ class TicTacToeState {
     // Private member variables.
     unsigned players_, turn_;
     std::vector<std::vector<int>> board_;
-
-    // Private member functions.
 
   public:
     // Constructors.

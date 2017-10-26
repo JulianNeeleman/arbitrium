@@ -1,7 +1,7 @@
 #ifndef LIB_ENGINE_H
 #define LIB_ENGINE_H
 
-#include "include/lib/player/player.h"
+#include "lib/include/player.h"
 
 #include <memory>
 #include <string>
@@ -24,6 +24,6 @@ template <class State, class Action> class Engine {
            const std::vector<std::unique_ptr<Player<State, Action>>> &);
 };
 
-#include "src/lib/engine.inc"
+#include "lib/src/engine.inc"
 
 #endif // LIB_ENGINE_H

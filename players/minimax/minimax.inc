@@ -1,4 +1,4 @@
-#include "include/lib/player/minimax.h"
+#include "players/minimax/minimax.h"
 
 /**
  * Assignment constructor.
@@ -48,7 +48,6 @@ Action Minimax<State, Action>::choose_action(const State &state) const {
     for (const Action &action : actions) {
         double score = color * minimax(state.transition(action), max_depth_ - 1,
                                        !state.get_turn());
-        std::cout << "score " << score << std::endl;
         if (score < best_score) {
             best_action = action;
             best_score = score;
