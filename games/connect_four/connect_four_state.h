@@ -8,9 +8,13 @@
 
 class ConnectFourState {
   private:
+    // Static member variables.
+    const static ROWS = 6, COLUMNS = 7;
+
     // Private member variables.
-    unsigned players_, turn_;
-    std::vector<std::vector<int>> board_;
+    unsigned turn_;
+    uint64_t board_[2];
+    std::vector<unsigned> columns_;
 
   public:
     // Constructors.

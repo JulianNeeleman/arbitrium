@@ -9,10 +9,10 @@ int main() {
         players;
     players.push_back(
         std::unique_ptr<Player<ConnectFourState, ConnectFourAction>>(
-            new Minimax<ConnectFourState, ConnectFourAction>(5)));
+            new Minimax<ConnectFourState, ConnectFourAction>(8)));
     players.push_back(
         std::unique_ptr<Player<ConnectFourState, ConnectFourAction>>(
-            new Minimax<ConnectFourState, ConnectFourAction>(5)));
+            new Minimax<ConnectFourState, ConnectFourAction>(8)));
     Engine<ConnectFourState, ConnectFourAction>(state, players);
     return 0;
 }
