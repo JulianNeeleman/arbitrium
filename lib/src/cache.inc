@@ -1,5 +1,7 @@
 #include "lib/include/cache.h"
 
+template <class State> void Cache<State>::flush() { memory_.clear(); }
+
 template <class State>
 void Cache<State>::add_to_cache(const State &state, double score) {
     memory_[state] = score;

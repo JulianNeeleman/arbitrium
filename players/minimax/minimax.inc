@@ -47,6 +47,9 @@ double Minimax<State, Action>::minimax(const State &state, int depth,
  */
 template <class State, class Action>
 Action Minimax<State, Action>::choose_action(const State &state) {
+    // Flush cache.
+    Cache<State>::flush();
+
     // Generate a list of possible actions.
     std::vector<Action> actions = state.actions();
 

@@ -10,6 +10,7 @@ template <class State> class Cache {
 
   public:
     // Public member functions.
+    void flush();
     void add_to_cache(const State &, double);
     std::pair<bool, double> retrieve_from_cache(const State &) const;
 };
