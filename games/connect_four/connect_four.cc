@@ -9,7 +9,7 @@ int main() {
         players;
     players.push_back(
         std::unique_ptr<Player<ConnectFourState, ConnectFourAction>>(
-            new Minimax<ConnectFourState, ConnectFourAction>(6)));
+            new Minimax<ConnectFourState, ConnectFourAction>(8)));
     players.push_back(
         std::unique_ptr<Player<ConnectFourState, ConnectFourAction>>(
             new Human<ConnectFourState, ConnectFourAction>()));

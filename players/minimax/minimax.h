@@ -13,7 +13,7 @@ class Minimax : public Player<State, Action>, public Cache<State> {
     int max_depth_;
 
     // Private member functions.
-    double minimax(const State &, int, bool);
+    double minimax(const State &, int, double, double, bool);
 
   public:
     // Constructors.

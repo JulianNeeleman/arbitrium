@@ -11,6 +11,7 @@ Minimax<State, Action>::Minimax(int max_depth) : max_depth_(max_depth) {}
  */
 template <class State, class Action>
 double Minimax<State, Action>::minimax(const State &state, int depth,
+                                       double alpha, double beta,
                                        bool maximize) {
     // Check cache.
     std::pair<bool, double> cache_result =
@@ -27,14 +28,24 @@ double Minimax<State, Action>::minimax(const State &state, int depth,
     if (maximize) {
         best_score = std::numeric_limits<double>::lowest();
         for (const Action &action : state.actions()) {
-            double score = minimax(state.transition(action), depth - 1, false);
+            double score = minimax(state.transition(action), depth - 1, alpha,
+                                   beta, false);
             best_score = std::max(best_score, score);
+            alpha = std::max(alpha, best_score);
+            if (beta <= alpha) {
+                break;
+            }
         }
     } else {
         best_score = std::numeric_limits<double>::max();
         for (const Action &action : state.actions()) {
-            double score = minimax(state.transition(action), depth - 1, true);
+            double score =
+                minimax(state.transition(action), depth - 1, alpha, beta, true);
             best_score = std::min(best_score, score);
+            beta = std::min(beta, best_score);
+            if (beta <= alpha) {
+                break;
+            }
         }
     }
 
@@ -59,6 +70,8 @@ Action Minimax<State, Action>::choose_action(const State &state) {
     int color = state.get_turn() ? -1.0 : 1.0;
     for (const Action &action : actions) {
         double score = color * minimax(state.transition(action), max_depth_ - 1,
+                                       std::numeric_limits<double>::lowest(),
+                                       std::numeric_limits<double>::max(),
                                        !state.get_turn());
         if (score < best_score) {
             best_action = action;

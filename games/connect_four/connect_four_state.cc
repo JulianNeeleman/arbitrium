@@ -101,7 +101,7 @@ double ConnectFourState::evaluate() const {
 std::vector<ConnectFourAction> ConnectFourState::actions() const {
     std::vector<ConnectFourAction> legal;
 
-    for (unsigned column = 0; column < 7; column++) {
+    for (unsigned column : {3, 2, 4, 1, 5, 0, 6}) {
         if (columns_[column] < 6) {
             legal.push_back(ConnectFourAction(column));
         }
