@@ -17,7 +17,7 @@ ConnectFourState::transition(const ConnectFourAction &action) const {
 
     // Apply changes to the state.
     unsigned row = columns_[action.get_column()];
-    child.board_[turn_] |= 1ULL << (row + action.get_column() * ROWS);
+    child.board_[turn_] |= 1ULL << (row + action.get_column() * (ROWS + 1));
     child.columns_[action.get_column()]++;
 
     // Move turn to next player.
@@ -37,7 +37,7 @@ bool ConnectFourState::operator<(const ConnectFourState &rhs) const {
  * Check if a player has got Connect Four, or the board is full.
  */
 bool ConnectFourState::is_terminal() const {
-    return evaluate() != 0.0 || actions().empty();
+    return evaluate_player(0) || evaluate_player(1) || actions().empty();
 }
 
 /**
@@ -118,7 +118,7 @@ std::string ConnectFourState::serialize() const {
     // Serialize the board.
     for (int row = 5; row >= 0; row--) {
         for (unsigned column = 0; column < 7; column++) {
-            unsigned i = row + column * ROWS;
+            unsigned i = row + column * (ROWS + 1);
             if ((board_[0] >> i) & 1ULL) {
                 out += "0\t";
             } else if ((board_[1] >> i) & 1ULL) {
