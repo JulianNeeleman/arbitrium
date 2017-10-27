@@ -4,17 +4,21 @@
 #include "games/connect_four/connect_four_action.h"
 
 #include <cassert>
+#include <tuple>
 #include <vector>
 
 class ConnectFourState {
   private:
     // Static member variables.
-    const static ROWS = 6, COLUMNS = 7;
+    const static unsigned ROWS = 6, COLUMNS = 7;
 
     // Private member variables.
-    unsigned turn_;
-    uint64_t board_[2];
+    unsigned players_, turn_;
+    int64_t board_[2];
     std::vector<unsigned> columns_;
+
+    // Private member functions.
+    double evaluate_player(bool) const;
 
   public:
     // Constructors.
