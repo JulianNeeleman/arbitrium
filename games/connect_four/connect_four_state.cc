@@ -86,7 +86,7 @@ double ConnectFourState::evaluate_player(bool player) const {
 }
 
 /**
- * Evaluate the position. If the current player wins, return +1. If
+ * Evaluate the position. If the player one wins, return +1. If
  * he loses, return -1. Otherwise, return 0.
  */
 double ConnectFourState::evaluate() const {

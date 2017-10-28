@@ -17,6 +17,7 @@ template <class State, class Action> class Engine {
 
     // Private member functions.
     void next_turn();
+    void next_simultaneous_turn();
     void log() const;
 
   public:
