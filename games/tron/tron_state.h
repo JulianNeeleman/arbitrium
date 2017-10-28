@@ -21,6 +21,7 @@ class TronState {
   public:
     // Constructors.
     TronState();
+    TronState(bool, const std::vector<std::vector<char>> &);
 
     // Operator overloads.
     bool operator<(const TronState &) const;

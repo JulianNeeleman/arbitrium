@@ -7,6 +7,7 @@ cc_library(
         "//lib:arbitrium_lib",
         "//players:players_lib",
     ],
+    visibility=["//bots:__subpackages__"],
 )
 
 cc_binary(

@@ -14,6 +14,28 @@ TronState::TronState() : turn_(0), board_(std::bitset<256>()) {
 }
 
 /**
+ * Assignment constructor.
+ */
+TronState::TronState(bool turn, const std::vector<std::vector<char>> &board)
+    : turn_(turn), board_(std::bitset<256>()) {
+    for (unsigned i = 0; i < 16; i++) {
+        for (unsigned j = 0; j < 16; j++) {
+            switch (board[i][j]) {
+            case 'x':
+                board_[i + j * 16];
+                break;
+            case '0':
+                positions_[0] = i + j * 16;
+                break;
+            case '1':
+                positions_[1] = i + j * 16;
+                break;
+            };
+        }
+    }
+}
+
+/**
  * Update the board with the action on a copy of the state.
  */
 TronState TronState::transition(const TronAction &action) const {
