@@ -1,4 +1,4 @@
-#include "players/minimax/minimax.h"
+#include "../include/minimax.hpp"
 
 /**
  * Assignment constructor.

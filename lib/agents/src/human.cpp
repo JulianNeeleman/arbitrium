@@ -1,9 +1,4 @@
-#include "players/human/human.h"
-
-/**
- * Assignment constructor.
- */
-template <class State, class Action> Human<State, Action>::Human() {}
+#include "../../../include/agents/human/human.h"
 
 /**
  * Choose the best action from the current state.

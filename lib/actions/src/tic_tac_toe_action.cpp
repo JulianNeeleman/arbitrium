@@ -1,4 +1,4 @@
-#include "games/tic_tac_toe/tic_tac_toe_action.h"
+#include "../include/tic_tac_toe_action.hpp"
 
 unsigned TicTacToeAction::get_i() const { return i_; }
 unsigned TicTacToeAction::get_j() const { return j_; }

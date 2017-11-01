@@ -1,4 +1,4 @@
-#include "games/connect_four/connect_four_action.h"
+#include "../include/connect_four_action.hpp"
 
 unsigned ConnectFourAction::get_column() const { return column_; }
 

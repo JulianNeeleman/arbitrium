@@ -1,5 +1,5 @@
-# Bazel.
-bazel-*
+# CMake.
+build/
 
 # LLVM.
 compile_commands.json

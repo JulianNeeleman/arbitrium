@@ -1,7 +1,7 @@
-#ifndef LIB_HUMAN_H
-#define LIB_HUMAN_H
+#ifndef AGENTS_HUMAN_HUMAN_H
+#define AGENTS_HUMAN_HUMAN_H
 
-#include "lib/include/player.h"
+#include "../../core/player.h"
 
 #include <iostream>
 
@@ -17,4 +17,4 @@ class Human : public Player<State, Action> {
 
 #include "players/human/human.inc"
 
-#endif // LIB_HUMAN_H
+#endif // AGENTS_HUMAN_HUMAN_H

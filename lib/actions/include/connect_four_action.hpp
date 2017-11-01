@@ -1,7 +1,7 @@
 #ifndef CONNECT_FOUR_ACTION_H
 #define CONNECT_FOUR_ACTION_H
 
-#include <string>
+#include <iostream>
 
 class ConnectFourAction {
   private:
@@ -10,7 +10,7 @@ class ConnectFourAction {
 
   public:
     // Constructors.
-    ConnectFourAction(unsigned);
+    explicit ConnectFourAction(unsigned);
 
     // Public member functions.
     std::string serialize() const;

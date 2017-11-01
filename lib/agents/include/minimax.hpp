@@ -1,8 +1,8 @@
-#ifndef LIB_MINIMAX_H
-#define LIB_MINIMAX_H
+#ifndef MINIMAX_H
+#define MINIMAX_H
 
-#include "lib/include/cache.h"
-#include "lib/include/player.h"
+#include "../../core/src/cache.hpp"
+#include "../../core/src/player.hpp"
 
 #include <limits>
 
@@ -26,6 +26,6 @@ class Minimax : public Player<State, Action>, public Cache<State> {
     void set_max_depth(int);
 };
 
-#include "players/minimax/minimax.inc"
+#include "../src/minimax.hpp"
 
-#endif // LIB_MINIMAX_H
+#endif // MINIMAX_H

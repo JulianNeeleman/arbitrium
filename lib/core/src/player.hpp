@@ -1,5 +1,5 @@
-#ifndef LIB_PLAYER_H
-#define LIB_PLAYER_H
+#ifndef PLAYER_H
+#define PLAYER_H
 
 template <class State, class Action> class Player {
   public:
@@ -7,4 +7,4 @@ template <class State, class Action> class Player {
     virtual Action choose_action(const State &) = 0;
 };
 
-#endif // LIB_PLAYER_H
+#endif // PLAYER_H
