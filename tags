@@ -1,0 +1,81 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+AGENTS_HUMAN_HUMAN_H	lib/agents/include/human.hpp	2;"	d
+COLUMNS	lib/states/include/connect_four_state.hpp	/^    const static unsigned ROWS = 6, COLUMNS = 7;$/;"	m	class:ConnectFourState
+CONNECT_FOUR_ACTION_H	lib/actions/include/connect_four_action.hpp	2;"	d
+CONNECT_FOUR_STATE_H	lib/states/include/connect_four_state.hpp	2;"	d
+CORE_CACHE_H	lib/core/src/cache.hpp	2;"	d
+Cache	lib/core/src/cache.hpp	/^template <class State> class Cache {$/;"	c
+ConnectFourAction	lib/actions/include/connect_four_action.hpp	/^class ConnectFourAction {$/;"	c
+ConnectFourAction	lib/actions/src/connect_four_action.cpp	/^ConnectFourAction::ConnectFourAction(unsigned column) : column_(column) {}$/;"	f	class:ConnectFourAction
+ConnectFourState	lib/states/include/connect_four_state.hpp	/^class ConnectFourState {$/;"	c
+ConnectFourState	lib/states/src/connect_four_state.cpp	/^ConnectFourState::ConnectFourState()$/;"	f	class:ConnectFourState
+ENGINE_H	lib/core/src/engine.hpp	2;"	d
+Engine	lib/core/src/engine.hpp	/^    Engine(const State &initial_state,$/;"	f	class:Engine
+Engine	lib/core/src/engine.hpp	/^template <class State, class Action> class Engine {$/;"	c
+Human	lib/agents/include/human.hpp	/^class Human : public Player<State, Action> {$/;"	c
+MINIMAX_H	lib/agents/include/minimax.hpp	2;"	d
+Minimax	lib/agents/include/minimax.hpp	/^class Minimax : public Player<State, Action>, public Cache<State> {$/;"	c
+Minimax	lib/agents/src/minimax.cpp	/^Minimax<State, Action>::Minimax(int max_depth) : max_depth_(max_depth) {}$/;"	f	class:Minimax
+PLAYER_H	lib/core/src/player.hpp	2;"	d
+Player	lib/core/src/player.hpp	/^template <class State, class Action> class Player {$/;"	c
+ROWS	lib/states/include/connect_four_state.hpp	/^    const static unsigned ROWS = 6, COLUMNS = 7;$/;"	m	class:ConnectFourState
+TIC_TAC_TOE_ACTION_H	lib/actions/include/tic_tac_toe_action.hpp	2;"	d
+TIC_TAC_TOE_STATE_H	lib/states/include/tic_tac_toe_state.hpp	2;"	d
+TicTacToeAction	lib/actions/include/tic_tac_toe_action.hpp	/^class TicTacToeAction {$/;"	c
+TicTacToeAction	lib/actions/src/tic_tac_toe_action.cpp	/^TicTacToeAction::TicTacToeAction(unsigned i, unsigned j) : i_(i), j_(j) {}$/;"	f	class:TicTacToeAction
+TicTacToeState	lib/states/include/tic_tac_toe_state.hpp	/^class TicTacToeState {$/;"	c
+TicTacToeState	lib/states/src/tic_tac_toe_state.cpp	/^TicTacToeState::TicTacToeState()$/;"	f	class:TicTacToeState
+actions	lib/states/src/connect_four_state.cpp	/^std::vector<ConnectFourAction> ConnectFourState::actions() const {$/;"	f	class:ConnectFourState
+actions	lib/states/src/tic_tac_toe_state.cpp	/^std::vector<TicTacToeAction> TicTacToeState::actions() const {$/;"	f	class:TicTacToeState
+add_to_cache	lib/core/src/cache.hpp	/^    void add_to_cache(const State &state, double score) {$/;"	f	class:Cache
+board_	lib/states/include/connect_four_state.hpp	/^    int64_t board_[2];$/;"	m	class:ConnectFourState
+board_	lib/states/include/tic_tac_toe_state.hpp	/^    std::vector<std::vector<int>> board_;$/;"	m	class:TicTacToeState
+choose_action	lib/agents/src/human.cpp	/^Action Human<State, Action>::choose_action(const State &state) {$/;"	f	class:Human
+choose_action	lib/agents/src/minimax.cpp	/^Action Minimax<State, Action>::choose_action(const State &state) {$/;"	f	class:Minimax
+column_	lib/actions/include/connect_four_action.hpp	/^    unsigned column_;$/;"	m	class:ConnectFourAction
+columns_	lib/states/include/connect_four_state.hpp	/^    std::vector<unsigned> columns_;$/;"	m	class:ConnectFourState
+evaluate	lib/states/src/connect_four_state.cpp	/^double ConnectFourState::evaluate() const {$/;"	f	class:ConnectFourState
+evaluate	lib/states/src/tic_tac_toe_state.cpp	/^double TicTacToeState::evaluate() const {$/;"	f	class:TicTacToeState
+evaluate_player	lib/states/src/connect_four_state.cpp	/^double ConnectFourState::evaluate_player(bool player) const {$/;"	f	class:ConnectFourState
+flush	lib/core/src/cache.hpp	/^    void flush() { memory_.clear(); }$/;"	f	class:Cache
+get_column	lib/actions/src/connect_four_action.cpp	/^unsigned ConnectFourAction::get_column() const { return column_; }$/;"	f	class:ConnectFourAction
+get_i	lib/actions/src/tic_tac_toe_action.cpp	/^unsigned TicTacToeAction::get_i() const { return i_; }$/;"	f	class:TicTacToeAction
+get_j	lib/actions/src/tic_tac_toe_action.cpp	/^unsigned TicTacToeAction::get_j() const { return j_; }$/;"	f	class:TicTacToeAction
+get_turn	lib/states/src/connect_four_state.cpp	/^unsigned ConnectFourState::get_turn() const { return turn_; }$/;"	f	class:ConnectFourState
+get_turn	lib/states/src/tic_tac_toe_state.cpp	/^unsigned TicTacToeState::get_turn() const { return turn_; }$/;"	f	class:TicTacToeState
+i_	lib/actions/include/tic_tac_toe_action.hpp	/^    unsigned i_, j_;$/;"	m	class:TicTacToeAction
+is_terminal	lib/states/src/connect_four_state.cpp	/^bool ConnectFourState::is_terminal() const {$/;"	f	class:ConnectFourState
+is_terminal	lib/states/src/tic_tac_toe_state.cpp	/^bool TicTacToeState::is_terminal() const {$/;"	f	class:TicTacToeState
+j_	lib/actions/include/tic_tac_toe_action.hpp	/^    unsigned i_, j_;$/;"	m	class:TicTacToeAction
+log	lib/core/src/engine.hpp	/^    void log() const {$/;"	f	class:Engine
+main	app/connect_four/connect_four.cc	/^int main() {$/;"	f
+main	app/tic_tac_toe/tic_tac_toe.cc	/^int main() {$/;"	f
+max_depth_	lib/agents/include/minimax.hpp	/^    int max_depth_;$/;"	m	class:Minimax
+memory_	lib/core/src/cache.hpp	/^    std::map<State, double> memory_;$/;"	m	class:Cache
+minimax	lib/agents/src/minimax.cpp	/^double Minimax<State, Action>::minimax(const State &state, int depth,$/;"	f	class:Minimax
+next_turn	lib/core/src/engine.hpp	/^    void next_turn() {$/;"	f	class:Engine
+operator <	lib/states/src/connect_four_state.cpp	/^bool ConnectFourState::operator<(const ConnectFourState &rhs) const {$/;"	f	class:ConnectFourState
+operator <	lib/states/src/tic_tac_toe_state.cpp	/^bool TicTacToeState::operator<(const TicTacToeState &rhs) const {$/;"	f	class:TicTacToeState
+override	lib/agents/include/human.hpp	/^    Action choose_action(const State &) override;$/;"	m	class:Human
+override	lib/agents/include/minimax.hpp	/^    Action choose_action(const State &) override;$/;"	m	class:Minimax
+players_	lib/core/src/engine.hpp	/^    const std::vector<std::unique_ptr<Player<State, Action>>> &players_;$/;"	m	class:Engine
+players_	lib/states/include/connect_four_state.hpp	/^    unsigned players_, turn_;$/;"	m	class:ConnectFourState
+players_	lib/states/include/tic_tac_toe_state.hpp	/^    unsigned players_, turn_;$/;"	m	class:TicTacToeState
+result	lib/states/src/connect_four_state.cpp	/^int ConnectFourState::result() const {$/;"	f	class:ConnectFourState
+result	lib/states/src/tic_tac_toe_state.cpp	/^int TicTacToeState::result() const {$/;"	f	class:TicTacToeState
+retrieve_from_cache	lib/core/src/cache.hpp	/^    std::pair<bool, double> retrieve_from_cache(const State &state) const {$/;"	f	class:Cache
+serialize	lib/actions/src/connect_four_action.cpp	/^std::string ConnectFourAction::serialize() const {$/;"	f	class:ConnectFourAction
+serialize	lib/actions/src/tic_tac_toe_action.cpp	/^std::string TicTacToeAction::serialize() const {$/;"	f	class:TicTacToeAction
+serialize	lib/states/src/connect_four_state.cpp	/^std::string ConnectFourState::serialize() const {$/;"	f	class:ConnectFourState
+serialize	lib/states/src/tic_tac_toe_state.cpp	/^std::string TicTacToeState::serialize() const {$/;"	f	class:TicTacToeState
+state_	lib/core/src/engine.hpp	/^    State state_;$/;"	m	class:Engine
+transition	lib/states/src/connect_four_state.cpp	/^ConnectFourState::transition(const ConnectFourAction &action) const {$/;"	f	class:ConnectFourState
+transition	lib/states/src/tic_tac_toe_state.cpp	/^TicTacToeState TicTacToeState::transition(const TicTacToeAction &action) const {$/;"	f	class:TicTacToeState
+turn_	lib/core/src/engine.hpp	/^    int turn_;$/;"	m	class:Engine
+turn_	lib/states/include/connect_four_state.hpp	/^    unsigned players_, turn_;$/;"	m	class:ConnectFourState
+turn_	lib/states/include/tic_tac_toe_state.hpp	/^    unsigned players_, turn_;$/;"	m	class:TicTacToeState

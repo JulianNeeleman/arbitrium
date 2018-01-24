@@ -26,6 +26,6 @@ class Minimax : public Player<State, Action>, public Cache<State> {
     void set_max_depth(int);
 };
 
-#include "../src/minimax.hpp"
+#include "../src/minimax.cpp"
 
 #endif // MINIMAX_H
