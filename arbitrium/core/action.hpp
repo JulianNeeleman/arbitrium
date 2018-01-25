@@ -10,7 +10,10 @@ template <class A> class Action : public Serializable {
     unsigned next_agent;
 
   public:
-    explicit Action(const unsigned);
+    explicit Action(const unsigned next_agent);
 };
+
+template <class A>
+Action<A>::Action(const unsigned next_agent) : next_agent(next_agent) {}
 
 #endif // ACTION_HPP

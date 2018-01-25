@@ -5,7 +5,7 @@
 
 #include <array>
 
-#include "state.hpp"
+#include "../core/state.hpp"
 #include "tic_tac_toe_action.hpp"
 
 class TicTacToeState : public State<TicTacToeState, TicTacToeAction> {
@@ -14,13 +14,13 @@ class TicTacToeState : public State<TicTacToeState, TicTacToeAction> {
   public:
     TicTacToeState();
 
-    bool operator<(const TicTacToeState &) const override;
+    bool operator<(const TicTacToeState &rhs) const override;
 
     std::vector<TicTacToeAction> legal_actions() const override;
-    TicTacToeState transition(const TicTacToeAction &) const override;
+    TicTacToeState transition(const TicTacToeAction &action) const override;
 
     int winner() const override;
-    bool check_cells(const std::array<unsigned, 3> &) const;
+    bool check(const std::array<unsigned, 3> &) const;
     double evaluate() const override;
 
     std::string serialize() const override;

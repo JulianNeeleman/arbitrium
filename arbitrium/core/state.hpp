@@ -12,7 +12,6 @@ template <class S, class A> class State : public Serializable {
     bool turn;
 
   public:
-    State() = default;
     virtual bool operator<(const S &) const = 0;
 
     virtual std::vector<A> legal_actions() const = 0;
@@ -23,6 +22,15 @@ template <class S, class A> class State : public Serializable {
 
     unsigned current_agent() const;
     unsigned other_agent() const;
+
 };
+
+template <class S, class A> unsigned State<S, A>::current_agent() const {
+    return turn + 1;
+}
+
+template <class S, class A> unsigned State<S, A>::other_agent() const {
+    return turn ? 1 : 2;
+}
 
 #endif // STATE_HPP

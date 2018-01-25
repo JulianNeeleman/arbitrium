@@ -5,7 +5,7 @@
 
 #include <string>
 
-#include "action.hpp"
+#include "../core/action.hpp"
 
 class TicTacToeAction : public Action<TicTacToeAction> {
     friend class TicTacToeState;
