@@ -17,12 +17,12 @@ int main() {
     srand(time(nullptr));
     TicTacToeState initial_state;
     std::array<int, 3> total = {0, 0, 0};
-    for (unsigned i = 0; i < 3; i++) {
+    for (unsigned i = 0; i < 100; i++) {
         std::cout << i << std::endl;
         std::vector<std::unique_ptr<Agent<TicTacToeState, TicTacToeAction>>>
             agents;
         std::unique_ptr<Agent<TicTacToeState, TicTacToeAction>> a(
-            new Negamax<TicTacToeState, TicTacToeAction>(22)),
+            new Random<TicTacToeState, TicTacToeAction>()),
             b(new Negamax<TicTacToeState, TicTacToeAction>(22));
         agents.push_back(std::move(a));
         agents.push_back(std::move(b));

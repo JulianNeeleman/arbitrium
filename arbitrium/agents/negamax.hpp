@@ -41,15 +41,11 @@ template <class S, class A> A Negamax<S, A>::query(const S &state) const {
     for (const A &action : state.legal_actions()) {
         S neighbor = state.transition(action);
         double eval = -negamax(neighbor, max_depth);
-        std::cout << state.current_agent() << " move " << eval << " " << action.serialize()
-                  << std::endl;
         if (best_eval < eval) {
             best_eval = eval;
             best_action = action;
         }
     }
-    std::cout << state.current_agent() << " best " << best_eval << " " << best_action.serialize()
-              << std::endl;
     return best_action;
 }
 
