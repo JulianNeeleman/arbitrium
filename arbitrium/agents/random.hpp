@@ -11,10 +11,10 @@
 template <class S, class A> class Random : public Agent<S, A> {
   public:
     Random() = default;
-    A query(const S &) const override;
+    A query(const S &)  override;
 };
 
-template <class S, class A> A Random<S, A>::query(const S &state) const {
+template <class S, class A> A Random<S, A>::query(const S &state) {
     std::vector<A> actions = state.legal_actions();
     return actions[rand() % actions.size()];
 }
