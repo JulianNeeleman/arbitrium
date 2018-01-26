@@ -50,10 +50,10 @@ ConnectFourState::transition(const ConnectFourAction &action) const {
 }
 
 int ConnectFourState::winner() const {
-    std::array<unsigned, 4> directions{1, 6, 7, 8};
-    int64_t side = board.at(other_agent() - 1), acc;
+    const std::array<unsigned, 4> directions{{1, 6, 7, 8}};
+    int64_t side = board.at(other_agent() - 1);
     for (unsigned direction : directions) {
-        acc = side & (side >> direction);
+        int64_t acc = side & (side >> direction);
         if ((acc & (acc >> (2 * direction))) != 0) {
             return other_agent();
         }
