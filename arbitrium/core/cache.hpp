@@ -10,14 +10,20 @@ template <class S> class Cache {
     std::map<S, double> memory;
 
   public:
+    void flush();
     void push(const S &state, const double score);
     bool hit(const S &state) const;
     double retrieve(const S &state) const;
 };
 
+template <class S> void Cache<S>::flush() {
+    memory.clear();
+}
+
 template <class S> void Cache<S>::push(const S &state, const double score) {
     memory[state] = score;
 }
+
 template <class S> bool Cache<S>::hit(const S &state) const {
     return memory.find(state) != memory.end();
 }
