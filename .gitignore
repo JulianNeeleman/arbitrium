@@ -7,3 +7,6 @@ tools/actions/
 
 # Vim.
 **/*.swp
+
+# Submissions.
+submission.zip

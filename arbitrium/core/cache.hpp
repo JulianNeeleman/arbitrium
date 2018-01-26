@@ -3,7 +3,6 @@
 #ifndef CACHE_HPP
 #define CACHE_HPP
 
-#include <iostream>
 #include <map>
 
 template <class S> class Cache {
