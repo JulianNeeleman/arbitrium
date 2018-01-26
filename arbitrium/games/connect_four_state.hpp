@@ -14,7 +14,7 @@ class ConnectFourState : public State<ConnectFourState, ConnectFourAction> {
 
   public:
     ConnectFourState();
-    ConnectFourState(const bool, const std::array<int64_t, 2>, const std::array<int, 7>);
+    ConnectFourState(const bool, const std::array<int64_t, 2>);
 
     bool operator<(const ConnectFourState &rhs) const override;
 

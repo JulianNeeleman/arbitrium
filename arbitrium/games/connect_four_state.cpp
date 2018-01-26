@@ -8,9 +8,19 @@ ConnectFourState::ConnectFourState()
     : State(false), board({{0, 0}}), heights({{0, 0, 0, 0, 0, 0, 0}}) {}
 
 ConnectFourState::ConnectFourState(const bool turn,
-                                   const std::array<int64_t, 2> board,
-                                   const std::array<int, 7> heights)
-    : State(turn), board(board), heights(heights) {}
+                                   const std::array<int64_t, 2> board)
+    : State(turn), board(board) {
+    for (unsigned column = 0; column < 7; column++) {
+        heights.at(column) = 0;
+        for (unsigned row = 0; row < 6; row++) {
+            for (const int64_t side : board) {
+                if ((side >> (row + 7 * column)) % 2 == 1) {
+                    heights.at(column) = row + 1;
+                }
+            }
+        }
+    }
+}
 
 bool ConnectFourState::operator<(const ConnectFourState &rhs) const {
     unsigned l_turn = current_agent(), r_turn = rhs.current_agent();

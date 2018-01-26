@@ -17,17 +17,17 @@ int main() {
     srand(time(nullptr));
     ConnectFourState initial_state;
     std::array<int, 3> total = {0, 0, 0};
-    for (unsigned i = 0; i < 100; i++) {
+    for (unsigned i = 0; i < 1; i++) {
         std::cout << i << std::endl;
         std::vector<std::unique_ptr<Agent<ConnectFourState, ConnectFourAction>>>
             agents;
         std::unique_ptr<Agent<ConnectFourState, ConnectFourAction>> a(
-            new Random<ConnectFourState, ConnectFourAction>()),
-            b(new Negamax<ConnectFourState, ConnectFourAction>(5));
+            new Negamax<ConnectFourState, ConnectFourAction>(6)),
+            b(new Negamax<ConnectFourState, ConnectFourAction>(2));
         agents.push_back(std::move(a));
         agents.push_back(std::move(b));
         Engine<ConnectFourState, ConnectFourAction> engine(initial_state, agents,
-                                                       false);
+                                                       true);
         total.at(engine.run())++;
     }
     for (unsigned i = 0; i < 3; i++) {

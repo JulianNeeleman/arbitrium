@@ -32,22 +32,19 @@ template <class T>
 void ConnectFourBot<T>::update_state(const std::string &value) {
     std::vector<std::string> cells = this->split(value, ',');
     std::array<int64_t, 2> board;
-    std::array<int, 7> heights{0, 0, 0, 0, 0, 0, 0};
     for (unsigned row = 0; row < 6; row++) {
         for (unsigned column = 0; column < 7; column++) {
             switch (cells[7 * row + column][0]) {
             case '0':
                 board[0] |= 1ULL << (5 - row + 7 * column);
-                heights.at(column) = row + 1;
             case '1':
                 board[1] |= 1ULL << (5 - row + 7 * column);
-                heights.at(column) = row + 1;
             default:
                 break;
             }
         }
     }
-    this->state = ConnectFourState(this->your_botid, board, heights);
+    this->state = ConnectFourState(this->your_botid, board);
 }
 
 template <class T> void ConnectFourBot<T>::move(const unsigned clock) {
