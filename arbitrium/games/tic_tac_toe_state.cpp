@@ -3,7 +3,7 @@
 #include "tic_tac_toe_state.hpp"
 
 TicTacToeState::TicTacToeState()
-    : State(), board({{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}}}) {}
+    : State(false), board({{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}}}) {}
 
 bool TicTacToeState::operator<(const TicTacToeState &rhs) const {
     unsigned l_turn = current_agent(), r_turn = rhs.current_agent();

@@ -10,10 +10,11 @@
 
 class ConnectFourState : public State<ConnectFourState, ConnectFourAction> {
     std::array<int64_t, 2> board;
-    std::array<int64_t, 7> heights;
+    std::array<int, 7> heights;
 
   public:
     ConnectFourState();
+    ConnectFourState(const bool, const std::array<int64_t, 2>, const std::array<int, 7>);
 
     bool operator<(const ConnectFourState &rhs) const override;
 

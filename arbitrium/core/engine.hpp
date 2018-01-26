@@ -36,7 +36,7 @@ template <class S, class A> void Engine<S, A>::next_turn() {
     A action = agents[state.current_agent() - 1]->query(state);
     if (verbose) {
         std::cout << "player " << state.current_agent() << " chose action \""
-                  << action.serialize() << std::endl;
+                  << action.serialize() << "\"" << std::endl;
     }
     state = state.transition(action);
 }

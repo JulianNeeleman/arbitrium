@@ -15,9 +15,12 @@ template <class S, class A> class Negamax : public Agent<S, A> {
     double negamax(const S &state, const unsigned depth) const;
 
   public:
+    Negamax();
     explicit Negamax(const unsigned max_depth);
     A query(const S &state) const override;
 };
+
+template <class S, class A> Negamax<S, A>::Negamax() : max_depth(6) {}
 
 template <class S, class A>
 Negamax<S, A>::Negamax(const unsigned max_depth) : max_depth(max_depth) {}

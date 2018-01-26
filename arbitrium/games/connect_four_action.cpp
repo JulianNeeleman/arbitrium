@@ -7,5 +7,5 @@ ConnectFourAction::ConnectFourAction(const unsigned next_turn,
     : Action(next_turn), column(column) {}
 
 std::string ConnectFourAction::serialize() const {
-    return "place token in column " + std::to_string(column);
+    return std::to_string(column);
 }
