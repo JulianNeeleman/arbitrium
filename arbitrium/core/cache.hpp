@@ -4,6 +4,7 @@
 #define CACHE_HPP
 
 #include <map>
+#include <iostream>
 
 template <class S> class Cache {
     std::map<S, double> memory;
@@ -16,6 +17,8 @@ template <class S> class Cache {
 };
 
 template <class S> void Cache<S>::flush() {
+    std::cout << "flushing cache with " << memory.size() << " elements"
+              << std::endl;
     memory.clear();
 }
 

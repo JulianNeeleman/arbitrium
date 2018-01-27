@@ -6,7 +6,19 @@ ConnectFourState::ConnectFourState() : BitboardPair<6, 7>(), heights{} {}
 
 ConnectFourState::ConnectFourState(
     const std::pair<Bitboard<6, 7>, Bitboard<6, 7>> &board, const bool turn)
-    : BitboardPair<6, 7>(board, turn), heights{} {}
+    : BitboardPair<6, 7>(board, turn), heights{} {
+    for (unsigned column = 0; column < 7; column++) {
+        for (unsigned row = 0; row < 6; row++) {
+            if (board_union().get(row, column)) {
+                heights.at(column) = row + 1;
+            }
+        }
+    }
+    for (unsigned column = 0; column < 7; column++) {
+        std::cout << heights.at(column) << " ";
+    }
+    std::cout << std::endl;
+}
 
 bool ConnectFourState::operator<(const ConnectFourState &rhs) const {
     return BitboardPair<6, 7>::operator<(rhs);
@@ -32,11 +44,11 @@ ConnectFourState::transition(const ConnectFourAction &action) const {
 }
 
 int ConnectFourState::winner() const {
-    if (current_agent_board().four_consecutive_bits()) {
-        return static_cast<int>(turn);
-    }
     if (other_agent_board().four_consecutive_bits()) {
         return static_cast<int>(!turn);
+    }
+    if (current_agent_board().four_consecutive_bits()) {
+        return static_cast<int>(turn);
     }
     return legal_actions().empty() ? -1 : -2;
 }

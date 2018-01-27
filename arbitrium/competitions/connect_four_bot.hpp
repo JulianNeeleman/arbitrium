@@ -31,16 +31,13 @@ void ConnectFourBot<T>::custom_setting(const std::string &key,
 template <class T>
 void ConnectFourBot<T>::update_state(const std::string &value) {
     std::vector<std::string> cells = this->split(value, ',');
-    std::pair<Bitboard<6, 7>, Bitboard<6, 7>> board;
+    std::pair<Bitboard<6, 7>, Bitboard<6, 7>> board {};
     for (unsigned i = 0; i < 42; i++) {
         unsigned row = i / 7, column = i % 7;
-        switch (cells[i][0]) {
-        case '0':
+        if (cells[i] == "0") {
             board.first.set(5 - row, column, true);
-        case '1':
+        } else if (cells[i] == "1") {
             board.second.set(5 - row, column, true);
-        default:
-            break;
         }
     }
     this->state = ConnectFourState(board, this->your_botid);
