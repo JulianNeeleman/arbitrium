@@ -48,7 +48,7 @@ void ConnectFourBot<T>::update_state(const std::string &value) {
 }
 
 template <class T> void ConnectFourBot<T>::move(const unsigned clock) {
-    ConnectFourAction action = this->agent.query(this->state);
+    ConnectFourAction action = this->agent.flush_cache_and_query(this->state);
     std::cout << "place_disc " << action.serialize() << std::endl;
 }
 
