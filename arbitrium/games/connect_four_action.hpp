@@ -10,10 +10,11 @@
 class ConnectFourAction : public Action<ConnectFourAction> {
     friend class ConnectFourState;
 
-    unsigned column;
+    bool next_turn;
+    unsigned row, column;
 
   public:
-    ConnectFourAction(const unsigned, const unsigned);
+    ConnectFourAction(const bool, const unsigned, const unsigned);
 
     std::string serialize() const override;
 };

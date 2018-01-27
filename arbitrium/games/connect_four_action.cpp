@@ -2,9 +2,9 @@
 
 #include "connect_four_action.hpp"
 
-ConnectFourAction::ConnectFourAction(const unsigned next_turn,
+ConnectFourAction::ConnectFourAction(const bool next_turn, const unsigned row,
                                      const unsigned column)
-    : Action(next_turn), column(column) {}
+    : next_turn(next_turn), row(row), column(column) {}
 
 std::string ConnectFourAction::serialize() const {
     return std::to_string(column);

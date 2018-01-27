@@ -6,14 +6,8 @@
 #include "serializable.hpp"
 
 template <class A> class Action : public Serializable {
-  protected:
-    unsigned next_agent;
-
   public:
-    explicit Action(const unsigned next_agent);
+    explicit Action() = default;
 };
-
-template <class A>
-Action<A>::Action(const unsigned next_agent) : next_agent(next_agent) {}
 
 #endif // ACTION_HPP

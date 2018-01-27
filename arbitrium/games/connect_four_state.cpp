@@ -1,83 +1,52 @@
 // Copyright 2018 ReSnap b.v. All Rights Reserved.
 
-#include <iostream>
-
 #include "connect_four_state.hpp"
 
-ConnectFourState::ConnectFourState()
-    : State(false), board({{0, 0}}), heights({{0, 0, 0, 0, 0, 0, 0}}) {}
+ConnectFourState::ConnectFourState() : BitboardPair<6, 7>(), heights{} {}
 
-ConnectFourState::ConnectFourState(const bool turn,
-                                   const std::array<int64_t, 2> board)
-    : State(turn), board(board) {
-    for (unsigned column = 0; column < 7; column++) {
-        heights.at(column) = 0;
-        for (unsigned row = 0; row < 6; row++) {
-            for (const int64_t side : board) {
-                if ((side >> (row + 7 * column)) % 2 == 1) {
-                    heights.at(column) = row + 1;
-                }
-            }
-        }
-    }
-}
+ConnectFourState::ConnectFourState(
+    const std::pair<Bitboard<6, 7>, Bitboard<6, 7>> &board, const bool turn)
+    : BitboardPair<6, 7>(board, turn), heights{} {}
 
 bool ConnectFourState::operator<(const ConnectFourState &rhs) const {
-    unsigned l_turn = current_agent(), r_turn = rhs.current_agent();
-    return l_turn == r_turn ? board < rhs.board : l_turn < r_turn;
+    return BitboardPair<6, 7>::operator<(rhs);
 }
 
 std::vector<ConnectFourAction> ConnectFourState::legal_actions() const {
     std::vector<ConnectFourAction> actions;
     for (unsigned column = 0; column < 7; column++) {
-        // std::cout << heights.at(column) << " ";
         if (heights.at(column) < 6) {
-            actions.push_back({other_agent(), column});
+            actions.push_back({!turn, heights.at(column), column});
         }
     }
-    // std::cout << std::endl;
     return actions;
 }
 
 ConnectFourState
 ConnectFourState::transition(const ConnectFourAction &action) const {
     ConnectFourState child = *this;
-    int64_t bit = 1LL << (child.heights.at(action.column) + 7 * action.column);
-    child.board.at(current_agent() - 1) |= bit;
-    child.heights.at(action.column)++;
-    child.turn = action.next_agent == 2;
+    child.current_agent_board().set(action.row, action.column, true);
+    child.heights.at(action.column) = action.row;
+    child.turn = action.next_turn;
     return child;
 }
 
 int ConnectFourState::winner() const {
-    const std::array<unsigned, 4> directions{{1, 6, 7, 8}};
-    int64_t side = board.at(other_agent() - 1);
-    for (unsigned direction : directions) {
-        int64_t acc = side & (side >> direction);
-        if ((acc & (acc >> (2 * direction))) != 0) {
-            return other_agent();
-        }
+    if (current_agent_board().four_consecutive_bits()) {
+        return static_cast<int>(turn);
     }
-    return legal_actions().empty() ? 0 : -1;
+    if (other_agent_board().four_consecutive_bits()) {
+        return static_cast<int>(!turn);
+    }
+    return legal_actions().empty() ? -1 : -2;
 }
 
-double ConnectFourState::evaluate() const {
-    return winner() == other_agent() ? -1 : 0;
-}
+double ConnectFourState::evaluate() const { return 0.0; }
 
 std::string ConnectFourState::serialize() const {
-    std::string serialization = "";
-    for (int i = 5; i >= 0; i--) {
-        for (unsigned j = 0; j < 7; j++) {
-            if ((board.at(0) >> (i + j * 7)) % 2 == 1) {
-                serialization += "1\t";
-            } else if ((board.at(1) >> (i + j * 7)) % 2 == 1) {
-                serialization += "2\t";
-            } else {
-                serialization += ".\t";
-            }
-        }
-        serialization += '\n';
-    }
-    return serialization;
+    return BitboardPair<6, 7>::serialize();
+}
+
+unsigned ConnectFourState::get_turn() const {
+    return static_cast<unsigned>(turn);
 }

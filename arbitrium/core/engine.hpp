@@ -33,9 +33,9 @@ Engine<S, A>::Engine(const S &initial_state,
     : state(initial_state), agents(std::move(agents)), verbose(verbose) {}
 
 template <class S, class A> void Engine<S, A>::next_turn() {
-    A action = agents[state.current_agent() - 1]->flush_cache_and_query(state);
+    A action = agents[state.get_turn()]->flush_cache_and_query(state);
     if (verbose) {
-        std::cout << "player " << state.current_agent() << " chose action \""
+        std::cout << "player " << state.get_turn() << " chose action \""
                   << action.serialize() << "\"" << std::endl;
     }
     state = state.transition(action);

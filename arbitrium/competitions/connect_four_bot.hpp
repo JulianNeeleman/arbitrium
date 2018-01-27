@@ -31,20 +31,20 @@ void ConnectFourBot<T>::custom_setting(const std::string &key,
 template <class T>
 void ConnectFourBot<T>::update_state(const std::string &value) {
     std::vector<std::string> cells = this->split(value, ',');
-    std::array<int64_t, 2> board;
+    std::pair<Bitboard<6, 7>, Bitboard<6, 7>> board;
     for (unsigned row = 0; row < 6; row++) {
         for (unsigned column = 0; column < 7; column++) {
             switch (cells[7 * row + column][0]) {
             case '0':
-                board[0] |= 1ULL << (5 - row + 7 * column);
+                board.first.set(row, column, true);
             case '1':
-                board[1] |= 1ULL << (5 - row + 7 * column);
+                board.second.set(row, column, true);
             default:
                 break;
             }
         }
     }
-    this->state = ConnectFourState(this->your_botid, board);
+    this->state = ConnectFourState(board, this->your_botid);
 }
 
 template <class T> void ConnectFourBot<T>::move(const unsigned clock) {

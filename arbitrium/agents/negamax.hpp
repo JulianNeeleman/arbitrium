@@ -47,11 +47,12 @@ template <class S, class A> A Negamax<S, A>::query(const S &state) {
     for (const A &action : state.legal_actions()) {
         S neighbor = state.transition(action);
         double eval = -this->evaluate_with_cache(neighbor);
-        if (best_eval < eval || (best_eval == eval && rand() % 2 == 1)) {
+        if (best_eval < eval) {
             best_eval = eval;
             best_action = action;
         }
     }
+    std::cout << best_eval << std::endl;
     return best_action;
 }
 

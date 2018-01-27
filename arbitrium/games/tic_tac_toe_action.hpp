@@ -10,10 +10,11 @@
 class TicTacToeAction : public Action<TicTacToeAction> {
     friend class TicTacToeState;
 
-    unsigned i, j;
+    bool next_turn;
+    unsigned row, column;
 
   public:
-    TicTacToeAction(const unsigned, const unsigned, const unsigned);
+    TicTacToeAction(const bool next_turn, const unsigned row, const unsigned column);
 
     std::string serialize() const override;
 };

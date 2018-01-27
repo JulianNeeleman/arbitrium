@@ -5,12 +5,11 @@
 
 #include <array>
 
+#include "../core/bitboard_pair.hpp"
 #include "../core/state.hpp"
 #include "tic_tac_toe_action.hpp"
 
-class TicTacToeState : public State<TicTacToeState, TicTacToeAction> {
-    std::array<std::array<unsigned, 3>, 3> board;
-
+class TicTacToeState : public State<TicTacToeState, TicTacToeAction>, public BitboardPair<3, 3> {
   public:
     TicTacToeState();
 
@@ -24,6 +23,8 @@ class TicTacToeState : public State<TicTacToeState, TicTacToeAction> {
     double evaluate() const override;
 
     std::string serialize() const override;
+
+    unsigned get_turn() const override;
 };
 
 #endif // TIC_TAC_TOE_STATE_HPP
