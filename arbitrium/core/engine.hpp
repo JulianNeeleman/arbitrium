@@ -57,7 +57,7 @@ template <class S, class A> void Engine<S, A>::dump_result() const {
     if (!verbose) {
         return;
     }
-    if (state.winner() == 0) {
+    if (state.winner() == -1) {
         std::cout << "game ended in a draw" << std::endl;
     } else {
         std::cout << "player " << state.winner() << " wins" << std::endl;
@@ -65,7 +65,7 @@ template <class S, class A> void Engine<S, A>::dump_result() const {
 }
 
 template <class S, class A> unsigned Engine<S, A>::run() {
-    while (state.winner() == -1) {
+    while (state.winner() == -2) {
         dump_log();
         next_turn();
     }

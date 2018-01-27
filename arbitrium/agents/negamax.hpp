@@ -3,7 +3,6 @@
 #ifndef NEGAMAX_HPP
 #define NEGAMAX_HPP
 
-#include <iostream>
 #include <limits>
 #include <vector>
 
@@ -20,14 +19,14 @@ template <class S, class A> class Negamax : public Agent<S, A> {
     A query(const S &state)  override;
 };
 
-template <class S, class A> Negamax<S, A>::Negamax() : max_depth(6) {}
+template <class S, class A> Negamax<S, A>::Negamax() : max_depth(4) {}
 
 template <class S, class A>
 Negamax<S, A>::Negamax(const unsigned max_depth) : max_depth(max_depth) {}
 
 template <class S, class A>
 double Negamax<S, A>::evaluate(const S &state) {
-    if (depth == 0 || state.winner() != -1) {
+    if (depth == 0 || state.winner() != -2) {
         return state.evaluate();
     }
     double best = std::numeric_limits<double>::lowest();
@@ -52,7 +51,6 @@ template <class S, class A> A Negamax<S, A>::query(const S &state) {
             best_action = action;
         }
     }
-    std::cout << best_eval << std::endl;
     return best_action;
 }
 

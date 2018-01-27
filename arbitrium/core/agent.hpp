@@ -3,6 +3,8 @@
 #ifndef AGENT_HPP
 #define AGENT_HPP
 
+#include <iostream>
+
 #include "cache.hpp"
 
 template <class S, class A> class Agent {

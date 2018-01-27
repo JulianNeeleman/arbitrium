@@ -26,7 +26,7 @@ ConnectFourState
 ConnectFourState::transition(const ConnectFourAction &action) const {
     ConnectFourState child = *this;
     child.current_agent_board().set(action.row, action.column, true);
-    child.heights.at(action.column) = action.row;
+    child.heights.at(action.column) = action.row + 1;
     child.turn = action.next_turn;
     return child;
 }
@@ -40,8 +40,6 @@ int ConnectFourState::winner() const {
     }
     return legal_actions().empty() ? -1 : -2;
 }
-
-double ConnectFourState::evaluate() const { return 0.0; }
 
 std::string ConnectFourState::serialize() const {
     return BitboardPair<6, 7>::serialize();

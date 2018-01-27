@@ -23,12 +23,13 @@ int main() {
             agents;
         std::unique_ptr<Agent<TicTacToeState, TicTacToeAction>> a(
             new Random<TicTacToeState, TicTacToeAction>()),
-            b(new Negamax<TicTacToeState, TicTacToeAction>(22));
+            b(new Negamax<TicTacToeState, TicTacToeAction>(100));
         agents.push_back(std::move(a));
         agents.push_back(std::move(b));
         Engine<TicTacToeState, TicTacToeAction> engine(initial_state, agents,
                                                        false);
-        total.at(engine.run())++;
+        int result = engine.run();
+        total.at(result < 0 ? 2 : result)++;
     }
     for (unsigned i = 0; i < 3; i++) {
         std::cout << i << " " << total.at(i) << std::endl;

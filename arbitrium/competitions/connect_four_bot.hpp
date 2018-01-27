@@ -32,19 +32,19 @@ template <class T>
 void ConnectFourBot<T>::update_state(const std::string &value) {
     std::vector<std::string> cells = this->split(value, ',');
     std::pair<Bitboard<6, 7>, Bitboard<6, 7>> board;
-    for (unsigned row = 0; row < 6; row++) {
-        for (unsigned column = 0; column < 7; column++) {
-            switch (cells[7 * row + column][0]) {
-            case '0':
-                board.first.set(row, column, true);
-            case '1':
-                board.second.set(row, column, true);
-            default:
-                break;
-            }
+    for (unsigned i = 0; i < 42; i++) {
+        unsigned row = i / 7, column = i % 7;
+        switch (cells[i][0]) {
+        case '0':
+            board.first.set(5 - row, column, true);
+        case '1':
+            board.second.set(5 - row, column, true);
+        default:
+            break;
         }
     }
     this->state = ConnectFourState(board, this->your_botid);
+    std::cout << this->state.serialize() << std::endl;
 }
 
 template <class T> void ConnectFourBot<T>::move(const unsigned clock) {

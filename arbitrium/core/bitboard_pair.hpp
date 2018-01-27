@@ -17,9 +17,10 @@ template <unsigned R, unsigned C> class BitboardPair : public Serializable {
     bool turn;
 
   public:
-    BitboardPair() = default;
+    BitboardPair();
     explicit BitboardPair(
-        const std::pair<Bitboard<R, C>, Bitboard<R, C>> &board, const bool turn);
+        const std::pair<Bitboard<R, C>, Bitboard<R, C>> &board,
+        const bool turn);
 
     virtual bool operator<(const BitboardPair<R, C> &rhs) const;
 
@@ -33,6 +34,9 @@ template <unsigned R, unsigned C> class BitboardPair : public Serializable {
 
     std::string serialize() const override;
 };
+
+template <unsigned R, unsigned C>
+BitboardPair<R, C>::BitboardPair() : board{}, turn(false) {}
 
 template <unsigned R, unsigned C>
 BitboardPair<R, C>::BitboardPair(
@@ -84,6 +88,7 @@ std::string BitboardPair<R, C>::serialize() const {
         }
         serialization += '\n';
     }
+    return serialization;
 }
 
 #endif // BITBOARD_PAIR_HPP

@@ -27,7 +27,6 @@ class ConnectFourState : public State<ConnectFourState, ConnectFourAction>,
 
     int winner() const override;
     bool check(const std::array<unsigned, 4> &) const;
-    double evaluate() const override;
 
     std::string serialize() const override;
 
