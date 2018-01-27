@@ -41,7 +41,6 @@ void ConnectFourBot<T>::update_state(const std::string &value) {
         }
     }
     this->state = ConnectFourState(board, this->your_botid);
-    std::cout << this->state.serialize() << std::endl;
 }
 
 template <class T> void ConnectFourBot<T>::move(const unsigned clock) {

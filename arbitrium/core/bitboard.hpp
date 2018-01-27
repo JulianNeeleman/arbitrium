@@ -21,6 +21,8 @@ template <unsigned R, unsigned C> class Bitboard {
     bool operator<(const Bitboard &rhs) const;
     Bitboard operator|(const Bitboard &rhs) const;
 
+    unsigned two_consecutive_bits_count() const;
+    unsigned three_consecutive_bits_count() const;
     bool three_consecutive_bits() const;
     bool four_consecutive_bits() const;
 
@@ -42,7 +44,7 @@ Bitboard<R, C>::Bitboard(const std::bitset<L> &board) : board(board) {}
 template <unsigned R, unsigned C>
 bool Bitboard<R, C>::operator<(const Bitboard<R, C> &rhs) const {
     for (unsigned i = 0; i < L; i++) {
-        if (board[i]^rhs.board[i]) {
+        if (board[i] ^ rhs.board[i]) {
             return board[i] < rhs.board[i];
         }
     }
@@ -55,14 +57,29 @@ Bitboard<R, C> Bitboard<R, C>::operator|(const Bitboard<R, C> &rhs) const {
 }
 
 template <unsigned R, unsigned C>
-bool Bitboard<R, C>::three_consecutive_bits() const {
+unsigned Bitboard<R, C>::two_consecutive_bits_count() const {
+    unsigned result = 0;
     for (unsigned direction : Bitboard<R, C>::directions) {
         std::bitset<L> shifted = board & (board >> direction);
-        if ((board & (shifted >> direction)) != 0) {
-            return true;
-        }
+        result += shifted.count();
     }
-    return false;
+    return result;
+}
+
+template <unsigned R, unsigned C>
+unsigned Bitboard<R, C>::three_consecutive_bits_count() const {
+    unsigned result = 0;
+    for (unsigned direction : Bitboard<R, C>::directions) {
+        std::bitset<L> shifted = board & (board >> direction),
+                       double_shifted = board & (shifted >> direction);
+        result += double_shifted.count();
+    }
+    return result;
+}
+
+template <unsigned R, unsigned C>
+bool Bitboard<R, C>::three_consecutive_bits() const {
+    return three_consecutive_bits_count() > 0;
 }
 
 template <unsigned R, unsigned C>

@@ -19,7 +19,7 @@ template <class S, class A> class Negamax : public Agent<S, A> {
     A query(const S &state) override;
 };
 
-template <class S, class A> Negamax<S, A>::Negamax() : max_depth(4) {}
+template <class S, class A> Negamax<S, A>::Negamax() : max_depth(5) {}
 
 template <class S, class A>
 Negamax<S, A>::Negamax(const unsigned max_depth) : max_depth(max_depth) {}
@@ -39,7 +39,6 @@ template <class S, class A> double Negamax<S, A>::evaluate(const S &state) {
 }
 
 template <class S, class A> A Negamax<S, A>::query(const S &state) {
-    if (state.winner() >= 0) std::cout << "damn" << std::endl;
     depth = max_depth;
     double best_eval = std::numeric_limits<double>::lowest();
     A best_action = state.legal_actions()[0];
@@ -50,9 +49,7 @@ template <class S, class A> A Negamax<S, A>::query(const S &state) {
             best_eval = eval;
             best_action = action;
         }
-        std::cout << "eval " << eval << std::endl;
     }
-    std::cout << "score " << best_eval << std::endl;
     return best_action;
 }
 

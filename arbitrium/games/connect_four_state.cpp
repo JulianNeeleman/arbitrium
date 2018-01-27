@@ -14,10 +14,6 @@ ConnectFourState::ConnectFourState(
             }
         }
     }
-    for (unsigned column = 0; column < 7; column++) {
-        std::cout << heights.at(column) << " ";
-    }
-    std::cout << std::endl;
 }
 
 bool ConnectFourState::operator<(const ConnectFourState &rhs) const {
@@ -51,6 +47,17 @@ int ConnectFourState::winner() const {
         return static_cast<int>(turn);
     }
     return legal_actions().empty() ? -1 : -2;
+}
+
+double ConnectFourState::evaluate() const {
+    int result = winner();
+    if (result >= 0) {
+        return result == get_turn() ? 10000.0 : -10000.0;
+    }
+    return 10 * current_agent_board().three_consecutive_bits_count() +
+           current_agent_board().two_consecutive_bits_count() -
+           10 * other_agent_board().three_consecutive_bits_count() -
+           other_agent_board().two_consecutive_bits_count();
 }
 
 std::string ConnectFourState::serialize() const {
