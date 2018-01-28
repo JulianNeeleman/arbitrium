@@ -107,7 +107,6 @@ A Negamax<S, A>::query(const S &state, const unsigned clock) {
         trans_table = this->cache;
         this->cache.flush();
     }
-    this->cache.flush();
     trans_table.flush();
     return total_best_action;
 }

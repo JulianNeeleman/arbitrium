@@ -29,6 +29,8 @@ template <class S> class Cache {
     bool hit(const S &state) const;
     double retrieve(const S &state) const;
 
+    size_t size() const;
+
     void order(std::vector<S> &states) const;
 };
 
@@ -45,6 +47,8 @@ template <class S> bool Cache<S>::hit(const S &state) const {
 template <class S> double Cache<S>::retrieve(const S &state) const {
     return memory.at(state);
 }
+
+template <class S> size_t Cache<S>::size() const { return memory.size(); }
 
 template <class S> void Cache<S>::order(std::vector<S> &states) const {
     sort(states.begin(), states.end(), Order(this));
