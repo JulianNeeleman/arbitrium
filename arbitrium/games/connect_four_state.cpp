@@ -55,9 +55,7 @@ double ConnectFourState::evaluate() const {
         return result == get_turn() ? 10000.0 : -10000.0;
     }
     return 10 * current_agent_board().three_consecutive_bits_count() +
-           current_agent_board().two_consecutive_bits_count() -
-           10 * other_agent_board().three_consecutive_bits_count() -
-           other_agent_board().two_consecutive_bits_count();
+           current_agent_board().two_consecutive_bits_count();
 }
 
 std::string ConnectFourState::serialize() const {

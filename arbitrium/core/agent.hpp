@@ -3,19 +3,19 @@
 #ifndef AGENT_HPP
 #define AGENT_HPP
 
-#include <iostream>
-
+#include "hourglass.hpp"
 #include "cache.hpp"
 
 template <class S, class A> class Agent {
   protected:
     Cache<S> cache;
+    Hourglass hourglass;
 
   private:
     virtual double evaluate(const S &state);
 
   public:
-    virtual A query(const S &state) = 0;
+    virtual A query(const S &state, const unsigned) = 0;
 };
 
 template <class S, class A> double Agent<S, A>::evaluate(const S &state) {

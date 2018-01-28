@@ -7,13 +7,13 @@ settings field_width 7
 settings field_height 6
 update game round 1
 update game field .,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.
-action move 10000
+action move 1000
 update game round 2
 update game field .,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,0,.,.,.,1,.,.
-action move 10000
+action move 1000
 update game round 3
 update game field .,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,0,.,.,0,.,.,1,1,.,.
-action move 10000
+action move 1000
 update game round 4
 update game field .,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,0,.,.,.,0,.,.,0,.,1,1,1,.,.
-action move 10000
+action move 1000

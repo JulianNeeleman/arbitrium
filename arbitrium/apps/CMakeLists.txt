@@ -12,3 +12,5 @@ target_link_libraries(four_in_a_row games)
 
 add_executable(connect_four connect_four.cpp)
 target_link_libraries(connect_four games)
+
+add_executable(bitboard bb_test.cpp)
