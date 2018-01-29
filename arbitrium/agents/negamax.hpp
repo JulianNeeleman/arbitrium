@@ -6,14 +6,21 @@
 #include <algorithm>
 #include <iostream>
 #include <limits>
+#include <numeric>
 #include <vector>
 
 #include "../core/agent.hpp"
 
+const double LOW = std::numeric_limits<double>::lowest(),
+             HIGH = std::numeric_limits<double>::max();
+
 template <class S, class A> class Negamax : public Agent<S, A> {
     Cache<S> trans_table;
-    unsigned max_depth;
 
+    void maybe_improve(std::pair<A, double> &target,
+                       const std::pair<A, double> &source) const;
+
+    A iterative_deepening(const S &state, const unsigned depth);
     double evaluate_with_cache(const S &state, const unsigned depth,
                                const double alpha, const double beta);
     double evaluate(const S &state, const unsigned depth, const double alpha,
@@ -21,19 +28,33 @@ template <class S, class A> class Negamax : public Agent<S, A> {
     double find_best_action(const S &state, const unsigned depth, double alpha,
                             const double beta);
 
+    std::vector<A> ordered_actions(const S &state) const;
     std::vector<S> ordered_states(const S &state) const;
     bool sort_by_trans_table(const S &lhs, const S &rhs) const;
 
   public:
-    Negamax();
-    explicit Negamax(const unsigned max_depth);
+    Negamax() = default;
     A query(const S &state, const unsigned clock) override;
 };
 
-template <class S, class A> Negamax<S, A>::Negamax() : max_depth(5) {}
+template <class S, class A>
+void Negamax<S, A>::maybe_improve(std::pair<A, double> &target,
+                                  const std::pair<A, double> &source) const {
+    if (target.second < source.second && !this->hourglass.out_of_time()) {
+        target = source;
+    }
+}
 
 template <class S, class A>
-Negamax<S, A>::Negamax(const unsigned max_depth) : max_depth(max_depth) {}
+A Negamax<S, A>::iterative_deepening(const S &state, const unsigned depth) {
+    std::pair<A, double> best = std::make_pair(state.legal_actions()[0], LOW);
+    for (const A &action : ordered_actions(state)) {
+        S neighbor = state.transition(action);
+        double current = -evaluate_with_cache(neighbor, depth, LOW, HIGH);
+        maybe_improve(best, std::make_pair(action, current));
+    }
+    return best.first;
+}
 
 template <class S, class A>
 double Negamax<S, A>::evaluate_with_cache(const S &state, const unsigned depth,
@@ -60,7 +81,7 @@ double Negamax<S, A>::evaluate(const S &state, const unsigned depth,
 template <class S, class A>
 double Negamax<S, A>::find_best_action(const S &state, const unsigned depth,
                                        double alpha, const double beta) {
-    double best = std::numeric_limits<double>::lowest();
+    double best = LOW;
     for (const S &neighbor : ordered_states(state)) {
         double score = -evaluate_with_cache(neighbor, depth - 1, -beta, -alpha);
         best = std::max(best, score);
@@ -73,11 +94,24 @@ double Negamax<S, A>::find_best_action(const S &state, const unsigned depth,
 }
 
 template <class S, class A>
+std::vector<A> Negamax<S, A>::ordered_actions(const S &state) const {
+    std::vector<A> actions = state.legal_actions();
+    std::vector<S> neighbors = state.legal_neighbors();
+
+    std::vector<std::size_t> perm(neighbors.size());
+    std::iota(perm.begin(), perm.end(), 0);
+    std::sort(perm.begin(), perm.end(), [&](std::size_t i, std::size_t j) {
+        return trans_table.compare(neighbors.at(i), neighbors.at(j));
+    });
+    std::vector<A> permuted_actions(actions);
+    std::transform(perm.begin(), perm.end(), permuted_actions.begin(),
+                   [&](std::size_t i) { return actions.at(i); });
+    return permuted_actions;
+}
+
+template <class S, class A>
 std::vector<S> Negamax<S, A>::ordered_states(const S &state) const {
-    std::vector<S> neighbors;
-    for (const A &action : state.legal_actions()) {
-        neighbors.push_back(state.transition(action));
-    }
+    std::vector<S> neighbors = state.legal_neighbors();
     trans_table.order(neighbors);
     return neighbors;
 }
@@ -85,30 +119,17 @@ std::vector<S> Negamax<S, A>::ordered_states(const S &state) const {
 template <class S, class A>
 A Negamax<S, A>::query(const S &state, const unsigned clock) {
     this->hourglass.set_time(clock / 2);
-    double total_best_eval = std::numeric_limits<double>::lowest();
-    A total_best_action = state.legal_actions()[0];
+    A response = state.legal_actions()[0];
     for (unsigned depth = 1; !this->hourglass.out_of_time(); depth++) {
-        double best_eval = std::numeric_limits<double>::lowest();
-        A best_action = state.legal_actions()[0];
-        for (const A &action : state.legal_actions()) {
-            S neighbor = state.transition(action);
-            double eval = -evaluate_with_cache(
-                neighbor, depth, std::numeric_limits<double>::lowest(),
-                std::numeric_limits<double>::max());
-            if (best_eval < eval) {
-                best_eval = eval;
-                best_action = action;
-            }
-        }
-        if (total_best_eval < best_eval && !this->hourglass.out_of_time()) {
-            total_best_eval = best_eval;
-            total_best_action = best_action;
+        A next_iteration_result = iterative_deepening(state, depth);
+        if (!this->hourglass.out_of_time()) {
+            response = next_iteration_result;
         }
         trans_table = this->cache;
         this->cache.flush();
     }
     trans_table.flush();
-    return total_best_action;
+    return response;
 }
 
 #endif // NEGAMAX_HPP

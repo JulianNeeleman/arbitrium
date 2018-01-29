@@ -17,7 +17,7 @@ class Hourglass {
     }
 
   public:
-    bool out_of_time() { return current_time() > end_time; }
+    bool out_of_time() const { return current_time() > end_time; }
     void set_time(const unsigned clock) {
         end_time = current_time() + milliseconds(clock);
     }

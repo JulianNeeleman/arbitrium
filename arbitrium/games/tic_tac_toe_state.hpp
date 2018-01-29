@@ -11,13 +11,15 @@
 
 class TicTacToeState : public State<TicTacToeState, TicTacToeAction>,
                        public BitboardPair<3, 3> {
+    friend struct std::hash<TicTacToeState>;
+
   public:
     TicTacToeState();
     explicit TicTacToeState(
         const std::pair<Bitboard<3, 3>, Bitboard<3, 3>> &board,
         const bool turn);
 
-    bool operator<(const TicTacToeState &rhs) const override;
+    bool operator==(const TicTacToeState &rhs) const override;
 
     std::vector<TicTacToeAction> legal_actions() const override;
     TicTacToeState transition(const TicTacToeAction &action) const override;

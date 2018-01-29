@@ -8,8 +8,8 @@ TicTacToeState::TicTacToeState(
     const std::pair<Bitboard<3, 3>, Bitboard<3, 3>> &board, const bool turn)
     : BitboardPair<3, 3>(board, turn) {}
 
-bool TicTacToeState::operator<(const TicTacToeState &rhs) const {
-    return BitboardPair<3, 3>::operator<(rhs);
+bool TicTacToeState::operator==(const TicTacToeState &rhs) const {
+    return BitboardPair<3, 3>::operator==(rhs);
 }
 
 std::vector<TicTacToeAction> TicTacToeState::legal_actions() const {

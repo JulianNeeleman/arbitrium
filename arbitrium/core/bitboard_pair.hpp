@@ -11,6 +11,8 @@
 #include "serializable.hpp"
 
 template <unsigned R, unsigned C> class BitboardPair : public Serializable {
+    friend struct std::hash<BitboardPair<R, C>>;
+
     std::pair<Bitboard<R, C>, Bitboard<R, C>> board;
 
   protected:
@@ -22,7 +24,7 @@ template <unsigned R, unsigned C> class BitboardPair : public Serializable {
         const std::pair<Bitboard<R, C>, Bitboard<R, C>> &board,
         const bool turn);
 
-    virtual bool operator<(const BitboardPair<R, C> &rhs) const;
+    bool operator==(const BitboardPair<R, C> &rhs) const;
 
     Bitboard<R, C> board_union() const;
 
@@ -44,8 +46,8 @@ BitboardPair<R, C>::BitboardPair(
     : board(board), turn(turn) {}
 
 template <unsigned R, unsigned C>
-bool BitboardPair<R, C>::operator<(const BitboardPair<R, C> &rhs) const {
-    return std::tie(turn, board) < std::tie(rhs.turn, rhs.board);
+bool BitboardPair<R, C>::operator==(const BitboardPair<R, C> &rhs) const {
+    return std::tie(turn, board) == std::tie(rhs.turn, rhs.board);
 }
 
 template <unsigned R, unsigned C>

@@ -12,6 +12,8 @@
 
 class ConnectFourState : public State<ConnectFourState, ConnectFourAction>,
                          public BitboardPair<6, 7> {
+    friend struct std::hash<ConnectFourState>;
+
     std::array<unsigned, 7> heights;
 
   public:
@@ -20,7 +22,7 @@ class ConnectFourState : public State<ConnectFourState, ConnectFourAction>,
         const std::pair<Bitboard<6, 7>, Bitboard<6, 7>> &board,
         const bool turn);
 
-    bool operator<(const ConnectFourState &rhs) const override;
+    bool operator==(const ConnectFourState &rhs) const override;
 
     std::vector<ConnectFourAction> legal_actions() const override;
     ConnectFourState transition(const ConnectFourAction &action) const override;

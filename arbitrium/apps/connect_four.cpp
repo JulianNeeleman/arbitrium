@@ -21,8 +21,8 @@ int main() {
         std::vector<std::unique_ptr<Agent<ConnectFourState, ConnectFourAction>>>
             agents;
         std::unique_ptr<Agent<ConnectFourState, ConnectFourAction>> a(
-            new Negamax<ConnectFourState, ConnectFourAction>(6)),
-            b(new Negamax<ConnectFourState, ConnectFourAction>(6));
+            new Negamax<ConnectFourState, ConnectFourAction>),
+            b(new Negamax<ConnectFourState, ConnectFourAction>);
         agents.push_back(std::move(a));
         agents.push_back(std::move(b));
         Engine<ConnectFourState, ConnectFourAction> engine(initial_state,

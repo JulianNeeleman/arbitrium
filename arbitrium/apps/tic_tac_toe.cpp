@@ -22,8 +22,8 @@ int main() {
         std::vector<std::unique_ptr<Agent<TicTacToeState, TicTacToeAction>>>
             agents;
         std::unique_ptr<Agent<TicTacToeState, TicTacToeAction>> a(
-            new Random<TicTacToeState, TicTacToeAction>()),
-            b(new Negamax<TicTacToeState, TicTacToeAction>(100));
+            new Random<TicTacToeState, TicTacToeAction>),
+            b(new Negamax<TicTacToeState, TicTacToeAction>);
         agents.push_back(std::move(a));
         agents.push_back(std::move(b));
         Engine<TicTacToeState, TicTacToeAction> engine(initial_state, agents,

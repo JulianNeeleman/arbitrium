@@ -3,11 +3,15 @@
 #ifndef CACHE_HPP
 #define CACHE_HPP
 
-#include <map>
+#include <unordered_map>
 #include <vector>
 
+#include "../games/connect_four_hash.hpp"
+#include "../games/tic_tac_toe_hash.hpp"
+#include "hash.hpp"
+
 template <class S> class Cache {
-    std::map<S, double> memory;
+    std::unordered_map<S, double> memory;
 
     struct Order {
         const Cache *cache;
@@ -32,6 +36,7 @@ template <class S> class Cache {
     size_t size() const;
 
     void order(std::vector<S> &states) const;
+    bool compare(const S &lhs, const S &rhs) const;
 };
 
 template <class S> void Cache<S>::flush() { memory.clear(); }
@@ -52,6 +57,10 @@ template <class S> size_t Cache<S>::size() const { return memory.size(); }
 
 template <class S> void Cache<S>::order(std::vector<S> &states) const {
     sort(states.begin(), states.end(), Order(this));
+}
+
+template <class S> bool Cache<S>::compare(const S &lhs, const S &rhs) const {
+    return Order(this)(lhs, rhs);
 }
 
 #endif // CACHE_HPP

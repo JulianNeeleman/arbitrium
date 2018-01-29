@@ -12,13 +12,15 @@ template <unsigned R, unsigned C> class Bitboard {
     static constexpr unsigned L = (R + 1) * C;
     static constexpr std::array<unsigned, 4> directions{1, R, R + 1, R + 2};
 
+    friend struct std::hash<Bitboard<R, C>>;
+
     std::bitset<L> board;
 
   public:
     Bitboard();
     explicit Bitboard(const std::bitset<L> &board);
 
-    bool operator<(const Bitboard &rhs) const;
+    bool operator==(const Bitboard &rhs) const;
     Bitboard operator|(const Bitboard &rhs) const;
 
     unsigned two_consecutive_bits_count() const;
@@ -42,13 +44,8 @@ template <unsigned R, unsigned C>
 Bitboard<R, C>::Bitboard(const std::bitset<L> &board) : board(board) {}
 
 template <unsigned R, unsigned C>
-bool Bitboard<R, C>::operator<(const Bitboard<R, C> &rhs) const {
-    for (unsigned i = 0; i < L; i++) {
-        if (board[i] ^ rhs.board[i]) {
-            return board[i] < rhs.board[i];
-        }
-    }
-    return false;
+bool Bitboard<R, C>::operator==(const Bitboard<R, C> &rhs) const {
+    return board == rhs.board;
 }
 
 template <unsigned R, unsigned C>
