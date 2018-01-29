@@ -32,7 +32,7 @@ template <unsigned R, unsigned C> class Bitboard {
 
 // Definition needs to be outside class statement.
 // https://stackoverflow.com/questions/8016780/undefined-reference-to-static-constexpr-char
-template <unsigned R, unsigned C> unsigned L = std::max(R, C) * std::max(R, C);
+template <unsigned R, unsigned C> constexpr unsigned Bitboard<R, C>::L;
 template <unsigned R, unsigned C>
 constexpr std::array<unsigned, 4> Bitboard<R, C>::directions;
 
