@@ -11,6 +11,8 @@
 template <unsigned R, unsigned C> class Bitboard {
     static constexpr unsigned L = (R + 1) * C;
     static constexpr std::array<unsigned, 4> directions{1, R, R + 1, R + 2};
+    static std::bitset<L> filled();
+    static std::bitset<L> legal_mask;
 
     friend struct std::hash<Bitboard<R, C>>;
 
@@ -28,15 +30,30 @@ template <unsigned R, unsigned C> class Bitboard {
     bool three_consecutive_bits() const;
     bool four_consecutive_bits() const;
 
+    unsigned four_bit_or_count() const;
+
     bool get(const unsigned row, const unsigned column) const;
     void set(const unsigned row, const unsigned column, const bool value);
 };
+
+template <unsigned R, unsigned C>
+std::bitset<Bitboard<R, C>::L> Bitboard<R, C>::filled() {
+    Bitboard<R, C> mask;
+    for (unsigned row = 0; row < R; row++) {
+        for (unsigned column = 0; column < C; column++) {
+            mask.set(row, column, true);
+        }
+    }
+    return mask.board;
+}
 
 // Definition needs to be outside class statement.
 // https://stackoverflow.com/questions/8016780/undefined-reference-to-static-constexpr-char
 template <unsigned R, unsigned C> constexpr unsigned Bitboard<R, C>::L;
 template <unsigned R, unsigned C>
 constexpr std::array<unsigned, 4> Bitboard<R, C>::directions;
+template <unsigned R, unsigned C>
+std::bitset<Bitboard<R, C>::L> Bitboard<R, C>::legal_mask = filled();
 
 template <unsigned R, unsigned C> Bitboard<R, C>::Bitboard() : board{} {}
 
@@ -88,6 +105,17 @@ bool Bitboard<R, C>::four_consecutive_bits() const {
         }
     }
     return false;
+}
+
+template <unsigned R, unsigned C>
+unsigned Bitboard<R, C>::four_bit_or_count() const {
+    unsigned total = 0;
+    for (unsigned direction : directions) {
+        std::bitset<L> shifted = board | (board >> direction);
+        shifted = (shifted | (shifted >> (2 * direction))) & legal_mask;
+        total += shifted.count();
+    }
+    return total;
 }
 
 template <unsigned R, unsigned C>
