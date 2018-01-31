@@ -4,6 +4,7 @@
 #define NEGAMAX_HPP
 
 #include <algorithm>
+#include <cmath>
 #include <iostream>
 #include <limits>
 #include <numeric>
@@ -20,7 +21,8 @@ template <class S, class A> class Negamax : public Agent<S, A> {
     void maybe_improve(std::pair<A, double> &target,
                        const std::pair<A, double> &source) const;
 
-    A iterative_deepening(const S &state, const unsigned depth);
+    std::pair<A, double> iterative_deepening(const S &state,
+                                             const unsigned depth);
     double evaluate_with_cache(const S &state, const unsigned depth,
                                const double alpha, const double beta);
     double evaluate(const S &state, const unsigned depth, const double alpha,
@@ -46,14 +48,15 @@ void Negamax<S, A>::maybe_improve(std::pair<A, double> &target,
 }
 
 template <class S, class A>
-A Negamax<S, A>::iterative_deepening(const S &state, const unsigned depth) {
+std::pair<A, double> Negamax<S, A>::iterative_deepening(const S &state,
+                                                        const unsigned depth) {
     std::pair<A, double> best = std::make_pair(state.legal_actions()[0], LOW);
     for (const A &action : ordered_actions(state)) {
         S neighbor = state.transition(action);
         double current = -evaluate_with_cache(neighbor, depth, LOW, HIGH);
         maybe_improve(best, std::make_pair(action, current));
     }
-    return best.first;
+    return best;
 }
 
 template <class S, class A>
@@ -118,12 +121,18 @@ std::vector<S> Negamax<S, A>::ordered_states(const S &state) const {
 
 template <class S, class A>
 A Negamax<S, A>::query(const S &state, const unsigned clock) {
-    this->hourglass.set_time(clock / 2);
+    this->hourglass.set_time(std::min(1500U, clock - 50));
     A response = state.legal_actions()[0];
-    for (unsigned depth = 1; !this->hourglass.out_of_time(); depth++) {
-        A next_iteration_result = iterative_deepening(state, depth);
-        if (!this->hourglass.out_of_time()) {
-            response = next_iteration_result;
+    bool terminal = false;
+    for (unsigned depth = 1; !this->hourglass.out_of_time() && !terminal;
+         depth++) {
+        auto next_iteration = iterative_deepening(state, depth);
+        if (std::abs(next_iteration.second) == 10000.0) {
+            terminal = true;
+        }
+        if (!this->hourglass.out_of_time() &&
+            next_iteration.second != -10000.0) {
+            response = next_iteration.first;
         }
         trans_table = this->cache;
         this->cache.flush();

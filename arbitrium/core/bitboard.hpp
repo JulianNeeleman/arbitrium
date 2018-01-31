@@ -8,7 +8,8 @@
 #include <array>
 #include <bitset>
 
-template <unsigned R, unsigned C> class Bitboard {
+template <unsigned R, unsigned C>
+class Bitboard : public std::bitset<(R + 1) * C> {
     static constexpr unsigned L = (R + 1) * C;
     static constexpr std::array<unsigned, 4> directions{1, R, R + 1, R + 2};
     static std::bitset<L> filled();
@@ -30,6 +31,7 @@ template <unsigned R, unsigned C> class Bitboard {
     bool three_consecutive_bits() const;
     bool four_consecutive_bits() const;
 
+    std::bitset<L> legal_and(const unsigned direction);
     unsigned four_bit_or_count() const;
 
     bool get(const unsigned row, const unsigned column) const;
@@ -108,11 +110,19 @@ bool Bitboard<R, C>::four_consecutive_bits() const {
 }
 
 template <unsigned R, unsigned C>
+std::bitset<Bitboard<R, C>::L>
+Bitboard<R, C>::legal_and(const unsigned direction) {
+    std::bitset<L> shifted = board & (board >> direction);
+    return shifted & (shifted >> (2 * direction));
+}
+
+template <unsigned R, unsigned C>
 unsigned Bitboard<R, C>::four_bit_or_count() const {
     unsigned total = 0;
     for (unsigned direction : directions) {
         std::bitset<L> shifted = board | (board >> direction);
-        shifted = (shifted | (shifted >> (2 * direction))) & legal_mask;
+        shifted = shifted | (shifted >> (2 * direction));
+        shifted = shifted & Bitboard<R, C>(legal_mask).legal_and(direction);
         total += shifted.count();
     }
     return total;

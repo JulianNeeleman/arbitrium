@@ -6,12 +6,9 @@
 #include "../core/bitboard.hpp"
 
 int main() {
-    Bitboard<3, 2> board;
-    board.set(0, 0, true);
-    board.set(1, 0, true);
-    board.set(2, 0, true);
-    std::cout << board.two_consecutive_bits_count() << std::endl;
-    std::cout << board.three_consecutive_bits_count() << std::endl;
+    Bitboard<10, 10> board;
+    board.set(5, 5, true);
+    std::cout << board.four_bit_or_count() << std::endl;
     return 0;
 }
 
